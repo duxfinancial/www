@@ -7,992 +7,1282 @@
 <meta name="description" content="Tailored mortgage, insurance, KiwiSaver and financial planning advice for New Zealanders. Wellington-based, independent advisers available 7 days a week.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --navy:   #0D1B2A;
-    --navy-2: #132234;
-    --navy-3: #1C3049;
-    --gold:   #C9A84C;
-    --gold-lt:#E8CC85;
-    --cream:  #F7F5F0;
-    --slate:  #5C6E82;
-    --mist:   #B8C4D0;
-    --white:  #FFFFFF;
-    --r: 6px;
-  }
+:root {
+  --navy:  #0D1B2A;
+  --navy2: #122030;
+  --gold:  #C9A84C;
+  --goldl: #E0C06A;
+  --cream: #F7F5F0;
+  --offwh: #EDEAE3;
+  --slate: #526070;
+  --mist:  #9AAAB8;
+  --red:   #C0392B;
+  --white: #FFFFFF;
+  --rad:   6px;
+}
 
-  html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--navy); line-height: 1.6; overflow-x: hidden; }
 
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--cream);
-    color: var(--navy);
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
+/* ─── TOP UTILITY BAR ─── */
+.util-bar {
+  background: var(--navy2);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 24px;
+  padding: 0 5%;
+  height: 40px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.util-bar a {
+  font-size: 12px;
+  color: var(--mist);
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: .03em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color .2s;
+}
+.util-bar a:hover { color: var(--white); }
+.util-bar i { font-size: 12px; }
 
-  /* ── NAV ── */
-  .nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: var(--navy);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 5%;
-    height: 68px;
-    border-bottom: 1px solid rgba(201,168,76,.15);
-  }
+/* ─── MAIN NAV ─── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  height: 64px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.25);
+}
 
-  .nav-logo {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-    text-decoration: none;
-  }
-  .nav-logo-mark {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-weight: 900;
-    color: var(--gold);
-    letter-spacing: .06em;
-  }
-  .nav-logo-text {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--mist);
-    letter-spacing: .14em;
-    text-transform: uppercase;
-  }
+.nav-logo {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.logo-mark {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--gold);
+  letter-spacing: .06em;
+}
+.logo-text {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--mist);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
 
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-    list-style: none;
-  }
-  .nav-links a {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--mist);
-    text-decoration: none;
-    letter-spacing: .03em;
-    transition: color .2s;
-  }
-  .nav-links a:hover { color: var(--white); }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+}
+.nav-links > li { position: relative; }
+.nav-links > li > a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--mist);
+  text-decoration: none;
+  padding: 0 14px;
+  height: 64px;
+  letter-spacing: .02em;
+  transition: color .2s, background .2s;
+  white-space: nowrap;
+}
+.nav-links > li > a:hover,
+.nav-links > li > a.active { color: var(--white); background: rgba(255,255,255,.05); }
+.nav-links > li > a i { font-size: 10px; opacity: .7; }
 
-  .btn-nav {
-    background: var(--gold) !important;
-    color: var(--navy) !important;
-    padding: 9px 20px;
-    border-radius: var(--r);
-    font-weight: 600 !important;
-    font-size: 13px;
-    letter-spacing: .03em;
-    transition: background .2s, transform .15s !important;
-  }
-  .btn-nav:hover { background: var(--gold-lt) !important; transform: translateY(-1px); }
+/* Dropdown */
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--white);
+  min-width: 220px;
+  border-radius: 0 0 var(--rad) var(--rad);
+  box-shadow: 0 8px 32px rgba(0,0,0,.18);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition: opacity .2s, transform .2s;
+  z-index: 300;
+  border-top: 3px solid var(--gold);
+}
+.nav-links > li:hover .dropdown {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.dropdown a {
+  display: block;
+  padding: 11px 18px;
+  font-size: 13px;
+  color: var(--navy);
+  text-decoration: none;
+  font-weight: 500;
+  transition: background .15s, color .15s;
+  border-bottom: 1px solid var(--offwh);
+}
+.dropdown a:last-child { border-bottom: none; }
+.dropdown a:hover { background: var(--offwh); color: var(--gold); }
 
-  .nav-hamburger {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--mist);
-    font-size: 22px;
-  }
+.btn-nav-cta {
+  background: var(--gold);
+  color: var(--navy) !important;
+  padding: 10px 22px !important;
+  border-radius: var(--rad);
+  font-weight: 700 !important;
+  height: auto !important;
+  font-size: 13px !important;
+  margin-left: 8px;
+  transition: background .2s, transform .15s !important;
+}
+.btn-nav-cta:hover { background: var(--goldl) !important; transform: translateY(-1px); }
 
-  /* ── HERO ── */
-  .hero {
-    background: var(--navy);
-    position: relative;
-    overflow: hidden;
-    min-height: 500px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+/* ─── HERO ─── */
+.hero {
+  position: relative;
+  min-height: 600px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: var(--navy);
+}
 
-  /* Subtle diagonal hatch for depth */
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      repeating-linear-gradient(
-        -55deg,
-        rgba(201,168,76,.025) 0px,
-        rgba(201,168,76,.025) 1px,
-        transparent 1px,
-        transparent 48px
-      );
-    pointer-events: none;
-  }
+/* Photo simulation: rich dark overlay with geometric light effect — no external image needed */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 75% 40%, rgba(30,55,90,.6) 0%, transparent 70%),
+    linear-gradient(135deg, #060E17 0%, #0D2340 40%, #152E50 60%, #0A1925 100%);
+}
+/* Subtle grid texture */
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(201,168,76,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+/* Light ray effect */
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: 5%;
+  width: 600px;
+  height: 900px;
+  background: linear-gradient(175deg, rgba(201,168,76,.08) 0%, transparent 55%);
+  transform: rotate(-15deg);
+  pointer-events: none;
+}
 
-  .hero-watermark {
-    position: absolute;
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-weight: 900;
-    font-size: 700px;
-    line-height: .85;
-    color: var(--gold);
-    opacity: .03;
-    right: -60px;
-    bottom: -100px;
-    user-select: none;
-    pointer-events: none;
-    letter-spacing: -.02em;
-  }
+.hero-watermark {
+  position: absolute;
+  right: -20px;
+  bottom: -60px;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 900;
+  font-size: 520px;
+  line-height: 1;
+  color: rgba(201,168,76,.055);
+  user-select: none;
+  pointer-events: none;
+  letter-spacing: -.02em;
+  z-index: 1;
+}
 
-  .hero-left {
-    padding: 96px 5% 80px;
-    position: relative;
-    z-index: 2;
-    max-width: 760px;
-  }
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 80px 5% 0;
+  width: 100%;
+}
 
-  .eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 22px;
-  }
-  .eyebrow::before {
-    content: '';
-    display: block;
-    width: 24px;
-    height: 2px;
-    background: var(--gold);
-    border-radius: 2px;
-  }
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 28px; height: 2px;
+  background: var(--gold);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
 
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(42px, 5.5vw, 68px);
-    font-weight: 900;
-    line-height: 1.05;
-    color: var(--cream);
-    margin-bottom: 24px;
-  }
-  .hero h1 em {
-    font-style: italic;
-    color: var(--gold);
-  }
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(40px, 5.5vw, 68px);
+  font-weight: 900;
+  line-height: 1.06;
+  color: var(--white);
+  max-width: 700px;
+  margin-bottom: 20px;
+}
+.hero h1 em { color: var(--gold); font-style: italic; }
 
-  .hero-sub {
-    font-size: 18px;
-    color: var(--mist);
-    line-height: 1.65;
-    max-width: 500px;
-    margin-bottom: 44px;
-  }
+.hero-sub {
+  font-size: 18px;
+  color: rgba(184,196,208,.9);
+  line-height: 1.65;
+  max-width: 520px;
+  margin-bottom: 40px;
+}
 
-  .hero-actions {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
+.hero-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 56px;
+}
 
-  .btn-primary {
-    display: inline-block;
-    background: var(--gold);
-    color: var(--navy);
-    padding: 15px 30px;
-    border-radius: var(--r);
-    font-size: 14px;
-    font-weight: 700;
-    text-decoration: none;
-    letter-spacing: .02em;
-    transition: background .2s, transform .15s;
-  }
-  .btn-primary:hover { background: var(--gold-lt); transform: translateY(-2px); }
+.btn-primary {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--navy);
+  padding: 15px 32px;
+  border-radius: var(--rad);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: .02em;
+  transition: background .2s, transform .15s;
+}
+.btn-primary:hover { background: var(--goldl); transform: translateY(-2px); }
 
-  .btn-ghost {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: var(--cream);
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-    opacity: .65;
-    transition: opacity .2s;
-  }
-  .btn-ghost:hover { opacity: 1; }
-  .btn-ghost i { font-size: 13px; transition: transform .2s; }
-  .btn-ghost:hover i { transform: translateX(3px); }
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 14px 0;
+  opacity: .75;
+  transition: opacity .2s;
+  letter-spacing: .01em;
+}
+.btn-outline:hover { opacity: 1; }
+.btn-outline i { font-size: 12px; transition: transform .2s; }
+.btn-outline:hover i { transform: translateX(4px); }
 
-  /* ── STATS BAR (replaces side panel) ── */
-  .hero-stats {
-    background: var(--gold);
-    display: flex;
-    align-items: stretch;
-    position: relative;
-    z-index: 2;
-  }
+/* ─── QUOTE CARDS ─── (Momentum-style, flush to hero bottom) */
+.quote-strip {
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: -1px;
+}
 
-  .stat-item {
-    flex: 1;
-    padding: 32px 5%;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    position: relative;
-  }
-  .stat-item + .stat-item::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 20%; bottom: 20%;
-    width: 1px;
-    background: rgba(13,27,42,.18);
-  }
+.quote-card {
+  background: var(--white);
+  border-top: 4px solid transparent;
+  padding: 28px 28px 24px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-right: 1px solid var(--offwh);
+  transition: border-top-color .2s, background .2s;
+  position: relative;
+}
+.quote-card:last-child { border-right: none; }
+.quote-card:hover { border-top-color: var(--gold); background: #FAFAF8; }
 
-  .stat-num {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(48px, 5vw, 72px);
-    font-weight: 900;
-    color: var(--navy);
-    line-height: 1;
-    flex-shrink: 0;
-  }
+.quote-card-icon {
+  width: 44px; height: 44px;
+  background: var(--offwh);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s;
+}
+.quote-card:hover .quote-card-icon { background: rgba(201,168,76,.15); }
+.quote-card-icon i { font-size: 20px; color: var(--gold); }
 
-  .stat-label {
-    font-size: 13px;
-    font-weight: 500;
-    color: rgba(13,27,42,.65);
-    line-height: 1.5;
-    text-transform: uppercase;
-    letter-spacing: .04em;
-  }
+.quote-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.2;
+}
+.quote-card p {
+  font-size: 13px;
+  color: var(--slate);
+  line-height: 1.5;
+  flex: 1;
+}
+.quote-card-link {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+.quote-card-link i { font-size: 11px; transition: transform .2s; }
+.quote-card:hover .quote-card-link i { transform: translateX(4px); }
 
-  /* ── TRUST BAR ── */
-  .trust-bar {
-    background: #EDE9E0;
-    border-bottom: 1px solid #DDD9D0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0;
-    padding: 0 5%;
-    flex-wrap: wrap;
-    overflow: hidden;
-  }
+/* ─── STATS BAR ─── */
+.stats-bar {
+  background: var(--navy);
+  display: flex;
+  align-items: stretch;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.stat-cell {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 28px 5%;
+  position: relative;
+}
+.stat-cell + .stat-cell {
+  border-left: 1px solid rgba(255,255,255,.08);
+}
+.stat-icon {
+  width: 48px; height: 48px;
+  background: rgba(201,168,76,.12);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.stat-icon i { font-size: 20px; color: var(--gold); }
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--mist);
+  line-height: 1.45;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  font-weight: 500;
+  margin-top: 4px;
+}
 
-  .trust-item {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--slate);
-    padding: 16px 28px;
-    position: relative;
-  }
-  .trust-item + .trust-item::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 20%; bottom: 20%;
-    width: 1px;
-    background: #CCC8BF;
-  }
-  .trust-item i {
-    font-size: 15px;
-    color: var(--gold);
-    flex-shrink: 0;
-  }
+/* ─── SECTION SHARED ─── */
+.section { padding: 80px 5%; }
+.w { max-width: 1160px; margin: 0 auto; }
 
-  /* ── SECTIONS shared ── */
-  .section {
-    padding: 88px 5%;
-  }
-  .section-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
+.sec-eye {
+  font-size: 11px; font-weight: 700; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 10px;
+}
+.sec-h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(26px, 3.5vw, 40px);
+  font-weight: 700; color: var(--navy);
+  line-height: 1.15; margin-bottom: 10px;
+}
+.sec-sub {
+  font-size: 17px; color: var(--slate);
+  line-height: 1.65; max-width: 540px; margin-bottom: 48px;
+}
 
-  .section-eyebrow {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 12px;
-  }
-  .section-heading {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(28px, 3.5vw, 40px);
-    font-weight: 700;
-    color: var(--navy);
-    line-height: 1.15;
-    margin-bottom: 12px;
-  }
-  .section-sub {
-    font-size: 17px;
-    color: var(--slate);
-    line-height: 1.65;
-    max-width: 520px;
-    margin-bottom: 52px;
-  }
+/* ─── ADVISER BANNER ─── */
+.adviser-section {
+  background: var(--offwh);
+  padding: 72px 5%;
+}
+.adviser-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.adviser-img-block {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--navy);
+  min-height: 380px;
+  display: flex;
+  align-items: flex-end;
+}
+/* Simulate rich photo */
+.adviser-img-block::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #0D2A45 0%, #1A4060 50%, #0D1F35 100%);
+}
+.adviser-img-block::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 50%;
+  background: linear-gradient(transparent, rgba(6,14,24,.85));
+}
+.adviser-img-caption {
+  position: relative;
+  z-index: 2;
+  padding: 28px;
+  color: var(--white);
+}
+.adviser-img-caption strong {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.adviser-img-caption span {
+  font-size: 13px;
+  color: var(--mist);
+}
+/* Decorative people silhouettes suggestion */
+.adviser-img-block .deco {
+  position: absolute;
+  top: 30px; left: 0; right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 12px;
+  padding: 0 32px;
+  z-index: 1;
+  height: 260px;
+}
+.deco-person {
+  background: rgba(201,168,76,.12);
+  border-radius: 60px 60px 0 0;
+  flex: 1;
+  max-width: 80px;
+  border: 1px solid rgba(201,168,76,.2);
+}
+.deco-person:nth-child(1) { height: 180px; }
+.deco-person:nth-child(2) { height: 240px; }
+.deco-person:nth-child(3) { height: 200px; }
+.deco-person:nth-child(4) { height: 160px; }
 
-  /* ── SERVICES GRID ── */
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-  }
+.adviser-text .sec-h2 { margin-bottom: 16px; }
+.adviser-text p { font-size: 16px; color: var(--slate); line-height: 1.7; margin-bottom: 16px; }
+.adviser-text p strong { color: var(--navy); font-weight: 700; }
+.adviser-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 24px 0 32px;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--white);
+  border: 1px solid #DDD9D0;
+  border-radius: 100px;
+  padding: 7px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--navy);
+}
+.badge i { color: var(--gold); font-size: 13px; }
 
-  .service-card {
-    background: var(--white);
-    border: 1px solid #E4E0D8;
-    border-radius: 10px;
-    padding: 32px 28px 28px;
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    position: relative;
-    overflow: hidden;
-    transition: border-color .25s, transform .2s, box-shadow .25s;
-  }
-  .service-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--gold);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform .3s ease;
-  }
-  .service-card:hover {
-    border-color: var(--gold);
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(13,27,42,.1);
-  }
-  .service-card:hover::after { transform: scaleX(1); }
+/* ─── PRODUCTS TAB SECTION ─── */
+.products-section { background: var(--white); padding: 80px 5%; }
+.tab-bar {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid var(--offwh);
+  margin-bottom: 40px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tab-bar::-webkit-scrollbar { display: none; }
+.tab-btn {
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  padding: 12px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--slate);
+  cursor: pointer;
+  white-space: nowrap;
+  letter-spacing: .02em;
+  transition: color .2s, border-color .2s;
+}
+.tab-btn.active, .tab-btn:hover { color: var(--navy); }
+.tab-btn.active { border-bottom-color: var(--gold); color: var(--navy); }
 
-  .service-icon-wrap {
-    width: 52px;
-    height: 52px;
-    background: #F0EDE6;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    transition: background .25s;
-  }
-  .service-card:hover .service-icon-wrap { background: #E8D99A; }
-  .service-icon-wrap i { font-size: 24px; color: var(--gold); }
+.tab-panel { display: none; }
+.tab-panel.active { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
 
-  .service-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--navy);
-    margin-bottom: 10px;
-  }
-  .service-card p {
-    font-size: 14px;
-    color: var(--slate);
-    line-height: 1.65;
-    margin-bottom: 20px;
-  }
-  .service-link {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--gold);
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    transition: gap .2s;
-  }
-  .service-card:hover .service-link { gap: 9px; }
+.prod-card {
+  border: 1px solid #E8E4DC;
+  border-radius: 10px;
+  padding: 28px 24px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--white);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow .25s, transform .2s;
+}
+.prod-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s ease;
+}
+.prod-card:hover { box-shadow: 0 8px 28px rgba(13,27,42,.1); transform: translateY(-3px); }
+.prod-card:hover::before { transform: scaleX(1); }
 
-  /* ── HOW IT WORKS ── */
-  .how-section {
-    background: var(--navy-2);
-    padding: 88px 5%;
-  }
-  .how-section .section-heading { color: var(--cream); }
-  .how-section .section-sub { color: var(--mist); }
+.prod-cat {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.prod-icon {
+  width: 52px; height: 52px;
+  background: var(--offwh);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+}
+.prod-icon i { font-size: 24px; color: var(--gold); }
+.prod-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 19px; font-weight: 700; color: var(--navy);
+  line-height: 1.2;
+}
+.prod-card p { font-size: 14px; color: var(--slate); line-height: 1.6; flex: 1; }
+.prod-highlight {
+  font-size: 13px; font-weight: 700;
+  color: var(--navy);
+  background: rgba(201,168,76,.12);
+  border-radius: 4px;
+  padding: 5px 10px;
+  display: inline-block;
+}
+.prod-actions {
+  display: flex; gap: 10px; margin-top: 4px; flex-wrap: wrap;
+}
+.prod-btn {
+  font-size: 12px; font-weight: 700;
+  padding: 8px 16px;
+  border-radius: var(--rad);
+  text-decoration: none;
+  transition: background .2s, color .2s;
+}
+.prod-btn-primary {
+  background: var(--gold);
+  color: var(--navy);
+}
+.prod-btn-primary:hover { background: var(--goldl); }
+.prod-btn-ghost {
+  color: var(--navy);
+  border: 1px solid #CCC8BF;
+}
+.prod-btn-ghost:hover { background: var(--offwh); }
 
-  .steps-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 0;
-    position: relative;
-  }
-  .steps-grid::before {
-    content: '';
-    position: absolute;
-    top: 28px;
-    left: calc(100% / 6);
-    right: calc(100% / 6);
-    height: 1px;
-    background: rgba(201,168,76,.25);
-    z-index: 0;
-  }
+/* ─── HOW IT WORKS ─── */
+.how-section { background: var(--navy); padding: 80px 5%; }
+.how-section .sec-h2 { color: var(--white); }
+.how-section .sec-sub { color: var(--mist); }
 
-  .step {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0 32px 0 0;
-    position: relative;
-    z-index: 1;
-  }
-  .step:last-child { padding-right: 0; }
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,.06);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.step-card {
+  background: rgba(255,255,255,.02);
+  padding: 40px 36px;
+  position: relative;
+}
+.step-card:hover { background: rgba(255,255,255,.04); }
+.step-num-big {
+  font-family: 'Playfair Display', serif;
+  font-size: 80px;
+  font-weight: 900;
+  color: rgba(201,168,76,.12);
+  line-height: 1;
+  position: absolute;
+  top: 20px; right: 24px;
+}
+.step-dot {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: rgba(201,168,76,.1);
+  border: 1px solid rgba(201,168,76,.3);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 24px;
+}
+.step-dot i { font-size: 22px; color: var(--gold); }
+.step-card h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px; font-weight: 700;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+.step-card p { font-size: 14px; color: var(--mist); line-height: 1.7; }
 
-  .step-num {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: rgba(201,168,76,.12);
-    border: 1px solid rgba(201,168,76,.35);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--gold);
-    margin-bottom: 24px;
-    flex-shrink: 0;
-  }
-  .step h4 {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--cream);
-    margin-bottom: 10px;
-  }
-  .step p {
-    font-size: 14px;
-    color: var(--mist);
-    line-height: 1.65;
-  }
+/* ─── TESTIMONIALS ─── */
+.reviews-section { background: var(--offwh); padding: 80px 5%; }
 
-  /* ── REVIEWS ── */
-  .reviews-section {
-    background: var(--cream);
-    padding: 88px 5%;
-  }
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.review-card {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #E4E0D8;
+}
+.review-stars { color: var(--gold); letter-spacing: 2px; font-size: 16px; margin-bottom: 16px; }
+.review-bar {
+  width: 36px; height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+  margin-bottom: 20px;
+  opacity: .5;
+}
+.review-text {
+  font-size: 15px; color: #3A4A5A;
+  line-height: 1.75; font-style: italic;
+  flex: 1; margin-bottom: 24px;
+}
+.review-author { font-size: 14px; font-weight: 700; color: var(--navy); }
+.review-type { font-size: 12px; color: var(--slate); margin-top: 3px; letter-spacing: .03em; }
 
-  .reviews-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 20px;
-  }
+/* ─── TEAM STRIP ─── */
+.team-section { background: var(--white); padding: 64px 5%; border-top: 1px solid var(--offwh); }
+.team-inner {
+  max-width: 1160px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 40px; flex-wrap: wrap;
+}
+.team-text h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 700; color: var(--navy); margin-bottom: 10px;
+}
+.team-text p { font-size: 16px; color: var(--slate); max-width: 480px; line-height: 1.65; }
+.team-right { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.avatars { display: flex; }
+.av {
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  border: 3px solid var(--white);
+  background: var(--navy2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 15px; font-weight: 700; color: var(--goldl);
+  margin-left: -14px;
+  transition: transform .2s, z-index .1s;
+  position: relative; z-index: 1; cursor: default;
+  box-shadow: 0 2px 8px rgba(0,0,0,.12);
+}
+.av:first-child { margin-left: 0; }
+.av:hover { transform: translateY(-4px) scale(1.08); z-index: 10; }
+.av-more { background: var(--gold); color: var(--navy); font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; }
 
-  .review-card {
-    background: var(--white);
-    border: 1px solid #E4E0D8;
-    border-radius: 10px;
-    padding: 28px;
-    display: flex;
-    flex-direction: column;
-  }
-  .review-stars {
-    color: var(--gold);
-    font-size: 15px;
-    letter-spacing: 3px;
-    margin-bottom: 14px;
-  }
-  .review-text {
-    font-size: 15px;
-    color: #3A4A5A;
-    line-height: 1.7;
-    font-style: italic;
-    flex: 1;
-    margin-bottom: 20px;
-  }
-  .review-author {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--navy);
-  }
-  .review-type {
-    font-size: 12px;
-    color: var(--slate);
-    margin-top: 3px;
-    letter-spacing: .03em;
-  }
-  .review-divider {
-    width: 32px;
-    height: 2px;
-    background: var(--gold);
-    border-radius: 2px;
-    margin-bottom: 16px;
-    opacity: .5;
-  }
+/* ─── CTA STRIP ─── */
+.cta-strip {
+  background: var(--gold);
+  padding: 72px 5%;
+  position: relative;
+  overflow: hidden;
+}
+.cta-strip::after {
+  content: 'DUX';
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 900;
+  font-size: 280px;
+  color: rgba(13,27,42,.07);
+  position: absolute;
+  right: 3%;
+  bottom: -40px;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+.cta-inner {
+  max-width: 1160px; margin: 0 auto;
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 40px; flex-wrap: wrap;
+  position: relative; z-index: 1;
+}
+.cta-text h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 700; color: var(--navy);
+  line-height: 1.2; margin-bottom: 8px;
+}
+.cta-text p { font-size: 16px; color: rgba(13,27,42,.6); }
 
-  /* ── TEAM STRIP ── */
-  .team-strip {
-    background: #EDE9E0;
-    padding: 64px 5%;
-    border-top: 1px solid #DDD9D0;
-    border-bottom: 1px solid #DDD9D0;
-  }
-  .team-strip-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
-    flex-wrap: wrap;
-  }
-  .team-strip-text h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 26px;
-    font-weight: 700;
-    color: var(--navy);
-    margin-bottom: 8px;
-  }
-  .team-strip-text p {
-    font-size: 15px;
-    color: var(--slate);
-    max-width: 440px;
-    line-height: 1.6;
-  }
-  .team-avatars {
-    display: flex;
-    gap: 0;
-  }
-  .avatar {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    border: 3px solid #EDE9E0;
-    background: var(--navy-3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Playfair Display', serif;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--gold-lt);
-    margin-left: -14px;
-    transition: transform .2s, z-index .2s;
-    position: relative;
-    z-index: 1;
-    cursor: default;
-  }
-  .avatar:first-child { margin-left: 0; }
-  .avatar:hover { transform: translateY(-4px) scale(1.08); z-index: 10; }
+.btn-dark {
+  display: inline-block;
+  background: var(--navy);
+  color: var(--white);
+  padding: 16px 36px;
+  border-radius: var(--rad);
+  font-size: 15px; font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background .2s, transform .15s;
+  flex-shrink: 0;
+}
+.btn-dark:hover { background: var(--navy2); transform: translateY(-2px); }
 
-  .avatar-more {
-    background: var(--gold);
-    color: var(--navy);
-    font-size: 13px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-  }
+/* ─── FOOTER ─── */
+footer { background: #070E18; padding: 56px 5% 32px; }
+.footer-top {
+  max-width: 1160px; margin: 0 auto 48px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.footer-brand-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 900; color: var(--gold);
+  letter-spacing: .06em; margin-bottom: 6px;
+}
+.footer-brand-sub {
+  font-size: 11px; color: #3A4A5A;
+  letter-spacing: .14em; text-transform: uppercase; margin-bottom: 20px;
+}
+.footer-desc { font-size: 13px; color: #4A5A6A; line-height: 1.7; margin-bottom: 24px; max-width: 280px; }
+.footer-contact a {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: #5C6E82;
+  text-decoration: none; margin-bottom: 10px;
+  transition: color .2s;
+}
+.footer-contact a:hover { color: var(--gold); }
+.footer-contact i { color: var(--gold); width: 14px; font-size: 13px; }
+.footer-col h4 {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: #4A5A6A; margin-bottom: 16px;
+}
+.footer-col a {
+  display: block; font-size: 13px; color: #4A5A6A;
+  text-decoration: none; margin-bottom: 11px;
+  transition: color .2s;
+}
+.footer-col a:hover { color: var(--mist); }
 
-  /* ── CTA STRIP ── */
-  .cta-strip {
-    background: var(--gold);
-    padding: 72px 5%;
-    position: relative;
-    overflow: hidden;
-  }
-  .cta-strip::before {
-    content: 'DUX';
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-weight: 900;
-    font-size: 300px;
-    color: rgba(13,27,42,.07);
-    position: absolute;
-    right: -20px;
-    bottom: -40px;
-    line-height: 1;
-    pointer-events: none;
-    user-select: none;
-  }
-  .cta-strip-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
-    flex-wrap: wrap;
-    position: relative;
-    z-index: 1;
-  }
-  .cta-strip h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(24px, 3vw, 34px);
-    font-weight: 700;
-    color: var(--navy);
-    max-width: 500px;
-    line-height: 1.2;
-  }
-  .cta-strip .cta-sub {
-    font-size: 16px;
-    color: rgba(13,27,42,.6);
-    margin-top: 8px;
-    font-weight: 400;
-    font-family: 'Inter', sans-serif;
-  }
-  .btn-dark {
-    display: inline-block;
-    background: var(--navy);
-    color: var(--cream);
-    padding: 16px 34px;
-    border-radius: var(--r);
-    font-size: 15px;
-    font-weight: 700;
-    text-decoration: none;
-    white-space: nowrap;
-    transition: background .2s, transform .15s;
-    flex-shrink: 0;
-  }
-  .btn-dark:hover { background: var(--navy-3); transform: translateY(-2px); }
+.footer-bottom {
+  max-width: 1160px; margin: 0 auto;
+  display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap; gap: 16px;
+}
+.footer-legal { font-size: 11px; color: #2A3A4A; line-height: 1.6; }
+.footer-social { display: flex; gap: 14px; }
+.footer-social a {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.05);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: #4A5A6A;
+  text-decoration: none;
+  transition: background .2s, color .2s;
+}
+.footer-social a:hover { background: rgba(201,168,76,.2); color: var(--gold); }
 
-  /* ── FOOTER ── */
-  footer {
-    background: #080F16;
-    padding: 48px 5% 32px;
-  }
-  .footer-top {
-    max-width: 1100px;
-    margin: 0 auto 40px;
-    display: flex;
-    justify-content: space-between;
-    gap: 40px;
-    flex-wrap: wrap;
-    padding-bottom: 40px;
-    border-bottom: 1px solid rgba(255,255,255,.07);
-  }
-  .footer-brand-mark {
-    font-family: 'Playfair Display', serif;
-    font-size: 28px;
-    font-weight: 900;
-    color: var(--gold);
-    letter-spacing: .06em;
-    margin-bottom: 8px;
-  }
-  .footer-brand-sub {
-    font-size: 12px;
-    color: #3A4A5A;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    margin-bottom: 18px;
-  }
-  .footer-contact a {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    color: var(--mist);
-    text-decoration: none;
-    margin-bottom: 8px;
-    transition: color .2s;
-  }
-  .footer-contact a:hover { color: var(--gold); }
-  .footer-contact i { font-size: 14px; color: var(--gold); width: 16px; }
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  .quote-strip { grid-template-columns: repeat(2, 1fr); }
+  .stats-bar { flex-wrap: wrap; }
+  .stat-cell { flex: 1 1 50%; }
+  .adviser-inner { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+}
 
-  .footer-col h4 {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--slate);
-    margin-bottom: 16px;
-  }
-  .footer-col a {
-    display: block;
-    font-size: 14px;
-    color: #5C6E82;
-    text-decoration: none;
-    margin-bottom: 10px;
-    transition: color .2s;
-  }
-  .footer-col a:hover { color: var(--mist); }
+@media (max-width: 768px) {
+  .util-bar { display: none; }
+  .nav-links { display: none; }
+  .hero { min-height: 480px; }
+  .hero h1 { font-size: 36px; }
+  .hero-sub { font-size: 16px; }
+  .quote-strip { grid-template-columns: 1fr 1fr; }
+  .steps { grid-template-columns: 1fr; }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .team-inner { flex-direction: column; align-items: flex-start; }
+  .cta-inner { flex-direction: column; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+}
 
-  .footer-bottom {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .footer-copy { font-size: 12px; color: #2A3A4A; }
-  .footer-social {
-    display: flex;
-    gap: 14px;
-  }
-  .footer-social a {
-    font-size: 16px;
-    color: #3A4A5A;
-    text-decoration: none;
-    transition: color .2s;
-  }
-  .footer-social a:hover { color: var(--gold); }
+@media (max-width: 520px) {
+  .quote-strip { grid-template-columns: 1fr; }
+  .stat-cell { flex: 1 1 100%; }
+  .footer-top { grid-template-columns: 1fr; }
+}
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 820px) {
-    .hero-left { padding: 64px 5% 56px; }
-    .stat-num { font-size: 42px; }
-    .stat-item { padding: 24px 5%; }
-
-    .nav-links { display: none; }
-    .nav-hamburger { display: block; }
-
-    .steps-grid::before { display: none; }
-    .step { padding: 0 0 32px; }
-    .step:last-child { padding-bottom: 0; }
-
-    .trust-item + .trust-item::before { display: none; }
-    .trust-item { padding: 12px 16px; }
-
-    .cta-strip-inner, .team-strip-inner { flex-direction: column; }
-
-    .footer-top { flex-direction: column; gap: 32px; }
-  }
-
-  @media (max-width: 560px) {
-    .hero-stats { flex-direction: column; }
-    .stat-item + .stat-item::before {
-      top: 0; bottom: auto;
-      left: 5%; right: 5%;
-      width: auto; height: 1px;
-    }
-    .stat-num { font-size: 52px; }
-  }
-
-  /* ── ANIMATIONS ── */
-  @media (prefers-reduced-motion: no-preference) {
-    .fade-up {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity .6s ease, transform .6s ease;
-    }
-    .fade-up.visible {
-      opacity: 1;
-      transform: none;
-    }
-  }
+/* ─── SCROLL ANIMATIONS ─── */
+@media (prefers-reduced-motion: no-preference) {
+  .fade-up { opacity: 0; transform: translateY(20px); transition: opacity .55s ease, transform .55s ease; }
+  .fade-up.vis { opacity: 1; transform: none; }
+}
 </style>
 </head>
 <body>
 
+<!-- UTILITY BAR -->
+<div class="util-bar">
+  <a href="tel:0800000987"><i class="fas fa-phone"></i> 0800 000 987</a>
+  <a href="mailto:admin@duxfinancial.co.nz"><i class="fas fa-envelope"></i> admin@duxfinancial.co.nz</a>
+  <a href="/contact"><i class="fas fa-calendar-check"></i> Book a chat</a>
+</div>
+
 <!-- NAV -->
 <nav class="nav" role="navigation" aria-label="Main navigation">
-  <a href="/" class="nav-logo" aria-label="DUX Financial Services home">
-    <span class="nav-logo-mark">DUX</span>
-    <span class="nav-logo-text">Financial Services</span>
+  <a href="/" class="nav-logo" aria-label="DUX Financial Services">
+    <span class="logo-mark">DUX</span>
+    <span class="logo-text">Financial Services</span>
   </a>
   <ul class="nav-links">
+    <li>
+      <a href="#">Services <i class="fas fa-chevron-down"></i></a>
+      <div class="dropdown">
+        <a href="/mortgage-finance"><i class="fas fa-house" style="width:16px;color:var(--gold);margin-right:6px"></i>Mortgage Finance</a>
+        <a href="/insurance-advice"><i class="fas fa-umbrella" style="width:16px;color:var(--gold);margin-right:6px"></i>Insurance Advice</a>
+        <a href="/kiwisaver"><i class="fas fa-piggy-bank" style="width:16px;color:var(--gold);margin-right:6px"></i>KiwiSaver</a>
+        <a href="/financial-planning"><i class="fas fa-chart-line" style="width:16px;color:var(--gold);margin-right:6px"></i>Financial Planning</a>
+      </div>
+    </li>
     <li><a href="/staff">About us</a></li>
-    <li><a href="/services-we-offer">Services</a></li>
     <li><a href="/dux-talk">DUX Talk</a></li>
     <li><a href="/reviews">Reviews</a></li>
-    <li><a href="/contact" class="btn-nav">Book a chat</a></li>
+    <li><a href="/employers-community">Employers</a></li>
+    <li><a href="/contact" class="btn-nav-cta">Book a free chat</a></li>
   </ul>
-  <button class="nav-hamburger" aria-label="Open menu" onclick="this.textContent = this.textContent === '☰' ? '✕' : '☰'; document.querySelector('.nav-links').style.display = document.querySelector('.nav-links').style.display === 'flex' ? 'none' : 'flex';">☰</button>
 </nav>
 
 <!-- HERO -->
-<section class="hero" aria-labelledby="hero-heading">
+<section class="hero" aria-labelledby="hero-h1">
+  <div class="hero-bg" aria-hidden="true"></div>
   <div class="hero-watermark" aria-hidden="true">D</div>
-  <div class="hero-left">
-    <p class="eyebrow">Wellington · New Zealand</p>
-    <h1 id="hero-heading">
-      Focus on what<br>matters most.<br>
-      <em>We'll handle the rest.</em>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Wellington · New Zealand</p>
+    <h1 id="hero-h1">
+      Build financial confidence<br>
+      for <em>uncertain times.</em>
     </h1>
     <p class="hero-sub">
-      Tailored mortgage, insurance, KiwiSaver and financial planning advice — built around your life, not a product brochure.
+      Wherever you are on your financial journey, DUX's accredited advisers turn uncertainty into confident steps toward your goals.
     </p>
-    <div class="hero-actions">
-      <a href="/contact" class="btn-primary">Book a free chat</a>
-      <a href="/services-we-offer" class="btn-ghost">Our services <i class="fas fa-arrow-right"></i></a>
+    <div class="hero-cta-row">
+      <a href="/contact" class="btn-primary">Get free advice</a>
+      <a href="/services-we-offer" class="btn-outline">Explore our services <i class="fas fa-arrow-right"></i></a>
     </div>
   </div>
 </section>
 
+<!-- QUOTE CARDS -->
+<div class="quote-strip" role="list" aria-label="Get a quote">
+  <a href="/mortgage-finance" class="quote-card" role="listitem">
+    <div class="quote-card-icon"><i class="fas fa-house" aria-hidden="true"></i></div>
+    <h3>Mortgage Finance</h3>
+    <p>First home, investment or build — we handle the lenders for you.</p>
+    <span class="quote-card-link">Talk to an adviser <i class="fas fa-arrow-right"></i></span>
+  </a>
+  <a href="/insurance-advice" class="quote-card" role="listitem">
+    <div class="quote-card-icon"><i class="fas fa-umbrella" aria-hidden="true"></i></div>
+    <h3>Insurance Advice</h3>
+    <p>Life, income, health and more — only what you need, at the right price.</p>
+    <span class="quote-card-link">Talk to an adviser <i class="fas fa-arrow-right"></i></span>
+  </a>
+  <a href="/kiwisaver" class="quote-card" role="listitem">
+    <div class="quote-card-icon"><i class="fas fa-piggy-bank" aria-hidden="true"></i></div>
+    <h3>KiwiSaver</h3>
+    <p>Is yours working as hard as you are? We'll review and optimise it.</p>
+    <span class="quote-card-link">Talk to an adviser <i class="fas fa-arrow-right"></i></span>
+  </a>
+  <a href="/financial-planning" class="quote-card" role="listitem">
+    <div class="quote-card-icon"><i class="fas fa-chart-line" aria-hidden="true"></i></div>
+    <h3>Financial Planning</h3>
+    <p>A personalised roadmap from where you are to where you want to be.</p>
+    <span class="quote-card-link">Talk to an adviser <i class="fas fa-arrow-right"></i></span>
+  </a>
+</div>
+
 <!-- STATS BAR -->
-<div class="hero-stats" role="list" aria-label="Key figures">
-  <div class="stat-item" role="listitem">
-    <div class="stat-num">20+</div>
-    <div class="stat-label">Years of combined<br>adviser experience</div>
+<div class="stats-bar" role="list" aria-label="Key figures">
+  <div class="stat-cell" role="listitem">
+    <div class="stat-icon"><i class="fas fa-calendar-days" aria-hidden="true"></i></div>
+    <div>
+      <div class="stat-num">20+</div>
+      <div class="stat-label">Years combined experience</div>
+    </div>
   </div>
-  <div class="stat-item" role="listitem">
-    <div class="stat-num">5★</div>
-    <div class="stat-label">Client satisfaction<br>across 100+ reviews</div>
+  <div class="stat-cell" role="listitem">
+    <div class="stat-icon"><i class="fas fa-star" aria-hidden="true"></i></div>
+    <div>
+      <div class="stat-num">5★</div>
+      <div class="stat-label">Across 100+ client reviews</div>
+    </div>
   </div>
-  <div class="stat-item" role="listitem">
-    <div class="stat-num">7</div>
-    <div class="stat-label">Days a week —<br>available when you need us</div>
+  <div class="stat-cell" role="listitem">
+    <div class="stat-icon"><i class="fas fa-users" aria-hidden="true"></i></div>
+    <div>
+      <div class="stat-num">10</div>
+      <div class="stat-label">Adviser & support team members</div>
+    </div>
   </div>
-</div>
-
-<!-- TRUST BAR -->
-<div class="trust-bar" role="list" aria-label="Credentials and contact">
-  <div class="trust-item" role="listitem">
-    <i class="fas fa-shield-halved" aria-hidden="true"></i>
-    Licensed Financial Advice Provider
-  </div>
-  <div class="trust-item" role="listitem">
-    <i class="fas fa-award" aria-hidden="true"></i>
-    FMA Registered Advisers
-  </div>
-  <div class="trust-item" role="listitem">
-    <i class="fas fa-handshake" aria-hidden="true"></i>
-    Independent — we work for you, not the bank
-  </div>
-  <div class="trust-item" role="listitem">
-    <i class="fas fa-phone" aria-hidden="true"></i>
-    <a href="tel:0800000987" style="color:inherit;text-decoration:none;">0800 000 987</a>
+  <div class="stat-cell" role="listitem">
+    <div class="stat-icon"><i class="fas fa-clock" aria-hidden="true"></i></div>
+    <div>
+      <div class="stat-num">7</div>
+      <div class="stat-label">Days a week — we're here</div>
+    </div>
   </div>
 </div>
 
-<!-- SERVICES -->
-<section class="section" aria-labelledby="services-heading">
-  <div class="section-inner">
-    <p class="section-eyebrow fade-up">What we do</p>
-    <h2 class="section-heading fade-up" id="services-heading">Advice that fits your life</h2>
-    <p class="section-sub fade-up">We don't push products. We listen, understand your goals, then find the right solution — now and into the future.</p>
+<!-- ADVISER SECTION -->
+<section class="adviser-section" aria-labelledby="adviser-h2">
+  <div class="adviser-inner">
+    <div class="adviser-img-block">
+      <div class="deco">
+        <div class="deco-person"></div>
+        <div class="deco-person"></div>
+        <div class="deco-person"></div>
+        <div class="deco-person"></div>
+      </div>
+      <div class="adviser-img-caption">
+        <strong>Your trusted Wellington advisers</strong>
+        <span>Independent — we work for you, not the bank</span>
+      </div>
+    </div>
+    <div class="adviser-text">
+      <p class="sec-eye fade-up">Your financial partner</p>
+      <h2 class="sec-h2 fade-up" id="adviser-h2">Your dreams,<br>our expertise.</h2>
+      <p class="fade-up">Team up with a DUX accredited financial adviser and discover the power of <strong>advice that's built around your life</strong>, not a product brochure.</p>
+      <p class="fade-up">Together, you'll create a personalised financial plan designed to help you conquer challenges, sidestep costly mistakes, and stay focused on turning your goals into reality.</p>
+      <div class="adviser-badges fade-up">
+        <span class="badge"><i class="fas fa-shield-halved"></i> Licensed Financial Advice Provider</span>
+        <span class="badge"><i class="fas fa-award"></i> FMA Registered</span>
+        <span class="badge"><i class="fas fa-handshake"></i> Independent advisers</span>
+        <span class="badge"><i class="fas fa-phone"></i> 7 days a week</span>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;" class="fade-up">
+        <a href="/contact" class="btn-primary">Book a free chat</a>
+        <a href="/staff" class="btn-dark">Meet the team</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <div class="services-grid">
-      <a href="/mortgage-finance" class="service-card fade-up">
-        <div class="service-icon-wrap"><i class="fas fa-house" aria-hidden="true"></i></div>
-        <h3>Mortgage Finance</h3>
-        <p>First home, house upgrade, investment property, or a build — we navigate the lenders so you don't have to.</p>
-        <span class="service-link">Learn more <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+<!-- PRODUCTS -->
+<section class="products-section" aria-labelledby="products-h2">
+  <div class="w">
+    <p class="sec-eye fade-up">What we do</p>
+    <h2 class="sec-h2 fade-up" id="products-h2">Solutions to help build your financial future</h2>
+    <p class="sec-sub fade-up">We don't push products. We listen, understand your goals, then find the right fit.</p>
+
+    <div class="tab-bar" role="tablist">
+      <button class="tab-btn active" onclick="switchTab(event,'all')" role="tab" aria-selected="true">All services</button>
+      <button class="tab-btn" onclick="switchTab(event,'mortgage')" role="tab" aria-selected="false">Mortgage</button>
+      <button class="tab-btn" onclick="switchTab(event,'insurance')" role="tab" aria-selected="false">Insurance</button>
+      <button class="tab-btn" onclick="switchTab(event,'savings')" role="tab" aria-selected="false">KiwiSaver & Savings</button>
+      <button class="tab-btn" onclick="switchTab(event,'planning')" role="tab" aria-selected="false">Financial Planning</button>
+    </div>
+
+    <div id="tab-all" class="tab-panel active">
+      <a href="/mortgage-finance" class="prod-card fade-up">
+        <span class="prod-cat">Mortgage</span>
+        <div class="prod-icon"><i class="fas fa-house" aria-hidden="true"></i></div>
+        <h3>First Home Buyers</h3>
+        <p>We answer every question, connect you to the right professionals, and walk you through the whole process.</p>
+        <span class="prod-highlight">Specialists in complex situations</span>
+        <div class="prod-actions">
+          <a href="/contact" class="prod-btn prod-btn-primary">Get advice</a>
+          <a href="/mortgage-finance" class="prod-btn prod-btn-ghost">Learn more</a>
+        </div>
       </a>
-      <a href="/insurance-advice" class="service-card fade-up">
-        <div class="service-icon-wrap"><i class="fas fa-umbrella" aria-hidden="true"></i></div>
-        <h3>Insurance Advice</h3>
-        <p>Life, income, health and more — the right cover for what you actually need, at the right price.</p>
-        <span class="service-link">Learn more <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+      <a href="/mortgage-finance" class="prod-card fade-up">
+        <span class="prod-cat">Mortgage</span>
+        <div class="prod-icon"><i class="fas fa-building" aria-hidden="true"></i></div>
+        <h3>Investment Property</h3>
+        <p>From rental finance to full investment analysis — we help you build your property portfolio strategically.</p>
+        <span class="prod-highlight">Rental analysis included</span>
+        <div class="prod-actions">
+          <a href="/contact" class="prod-btn prod-btn-primary">Get advice</a>
+          <a href="/mortgage-finance" class="prod-btn prod-btn-ghost">Learn more</a>
+        </div>
       </a>
-      <a href="/kiwisaver" class="service-card fade-up">
-        <div class="service-icon-wrap"><i class="fas fa-piggy-bank" aria-hidden="true"></i></div>
-        <h3>KiwiSaver</h3>
-        <p>Is your KiwiSaver working as hard as you are? We'll review your fund and make sure it's set up to grow.</p>
-        <span class="service-link">Learn more <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+      <a href="/insurance-advice" class="prod-card fade-up">
+        <span class="prod-cat">Insurance</span>
+        <div class="prod-icon"><i class="fas fa-heart-pulse" aria-hidden="true"></i></div>
+        <h3>Life & Income Cover</h3>
+        <p>Protect your family and your income. Risk analysis for personal and business purposes across all insurance types.</p>
+        <span class="prod-highlight">Only what you actually need</span>
+        <div class="prod-actions">
+          <a href="/contact" class="prod-btn prod-btn-primary">Get advice</a>
+          <a href="/insurance-advice" class="prod-btn prod-btn-ghost">Learn more</a>
+        </div>
       </a>
-      <a href="/financial-planning" class="service-card fade-up">
-        <div class="service-icon-wrap"><i class="fas fa-chart-line" aria-hidden="true"></i></div>
+      <a href="/kiwisaver" class="prod-card fade-up">
+        <span class="prod-cat">KiwiSaver</span>
+        <div class="prod-icon"><i class="fas fa-piggy-bank" aria-hidden="true"></i></div>
+        <h3>KiwiSaver Review</h3>
+        <p>As your balance grows, the right advice matters more. We review your fund and make sure it's working the right way.</p>
+        <span class="prod-highlight">Free initial review</span>
+        <div class="prod-actions">
+          <a href="/contact" class="prod-btn prod-btn-primary">Get advice</a>
+          <a href="/kiwisaver" class="prod-btn prod-btn-ghost">Learn more</a>
+        </div>
+      </a>
+      <a href="/financial-planning" class="prod-card fade-up">
+        <span class="prod-cat">Planning</span>
+        <div class="prod-icon"><i class="fas fa-map" aria-hidden="true"></i></div>
         <h3>Financial Planning</h3>
-        <p>Where are you now, and where do you want to be? We'll map the road and keep you on track.</p>
-        <span class="service-link">Learn more <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+        <p>Where are you now, where do you want to be? We build a plan and review it regularly to keep you on track.</p>
+        <span class="prod-highlight">Long-term relationship</span>
+        <div class="prod-actions">
+          <a href="/contact" class="prod-btn prod-btn-primary">Get advice</a>
+          <a href="/financial-planning" class="prod-btn prod-btn-ghost">Learn more</a>
+        </div>
+      </a>
+      <a href="/employers-community" class="prod-card fade-up">
+        <span class="prod-cat">Employers</span>
+        <div class="prod-icon"><i class="fas fa-briefcase" aria-hidden="true"></i></div>
+        <h3>Employer Services</h3>
+        <p>We work with employers and community groups to provide financial education and advice to their teams.</p>
+        <span class="prod-highlight">Group sessions available</span>
+        <div class="prod-actions">
+          <a href="/contact" class="prod-btn prod-btn-primary">Enquire</a>
+          <a href="/employers-community" class="prod-btn prod-btn-ghost">Learn more</a>
+        </div>
+      </a>
+    </div>
+
+    <div id="tab-mortgage" class="tab-panel">
+      <a href="/mortgage-finance" class="prod-card fade-up">
+        <span class="prod-cat">Mortgage</span>
+        <div class="prod-icon"><i class="fas fa-house"></i></div>
+        <h3>First Home Buyers</h3>
+        <p>Full support from pre-approval to settlement. Available 7 days a week with a written personalised report.</p>
+        <div class="prod-actions"><a href="/contact" class="prod-btn prod-btn-primary">Get advice</a><a href="/mortgage-finance" class="prod-btn prod-btn-ghost">Learn more</a></div>
+      </a>
+      <a href="/mortgage-finance" class="prod-card fade-up">
+        <span class="prod-cat">Mortgage</span>
+        <div class="prod-icon"><i class="fas fa-arrow-up-from-bracket"></i></div>
+        <h3>House Upgrade</h3>
+        <p>Coordinate your buy and sell, assess bridging options, and structure the best outcome for your situation.</p>
+        <div class="prod-actions"><a href="/contact" class="prod-btn prod-btn-primary">Get advice</a><a href="/mortgage-finance" class="prod-btn prod-btn-ghost">Learn more</a></div>
+      </a>
+      <a href="/mortgage-finance" class="prod-card fade-up">
+        <span class="prod-cat">Mortgage</span>
+        <div class="prod-icon"><i class="fas fa-building"></i></div>
+        <h3>Rental Property</h3>
+        <p>Finance and investment analysis to help you build a property portfolio that works toward your retirement goals.</p>
+        <div class="prod-actions"><a href="/contact" class="prod-btn prod-btn-primary">Get advice</a><a href="/mortgage-finance" class="prod-btn prod-btn-ghost">Learn more</a></div>
+      </a>
+      <a href="/mortgage-finance" class="prod-card fade-up">
+        <span class="prod-cat">Mortgage</span>
+        <div class="prod-icon"><i class="fas fa-helmet-safety"></i></div>
+        <h3>Building a House</h3>
+        <p>We co-ordinate lenders, builders, councils and tradespeople so you can enjoy the build instead of drowning in it.</p>
+        <div class="prod-actions"><a href="/contact" class="prod-btn prod-btn-primary">Get advice</a><a href="/mortgage-finance" class="prod-btn prod-btn-ghost">Learn more</a></div>
+      </a>
+    </div>
+
+    <div id="tab-insurance" class="tab-panel">
+      <a href="/insurance-advice" class="prod-card fade-up">
+        <span class="prod-cat">Insurance</span>
+        <div class="prod-icon"><i class="fas fa-heart-pulse"></i></div>
+        <h3>Life Cover</h3>
+        <p>Protect the people who depend on you. We find the right level of cover at the right price.</p>
+        <div class="prod-actions"><a href="/contact" class="prod-btn prod-btn-primary">Get advice</a><a href="/insurance-advice" class="prod-btn prod-btn-ghost">Learn more</a></div>
+      </a>
+      <a href="/insurance-advice" class="prod-card fade-up">
+        <span class="prod-cat">Insurance</span>
+        <div class="prod-icon"><i class="fas fa-suitcase-medical"></i></div>
+        <h3>Income Protection</h3>
+        <p>Your income is your most valuable asset. We make sure you're covered if you can't work.</p>
+        <div class="prod-actions"><a href="/contact" class="prod-btn prod-btn-primary">Get advice</a><a href="/insurance-advice" class="prod-btn prod-btn-ghost">Learn more</a></div>
+      </a>
+      <a href="/insurance-advice" class="prod-card fade-up">
+        <span class="prod-cat">Insurance</span>
+        <div class="prod-icon"><i class="fas fa-briefcase"></i></div>
+        <h3>Business Insurance</h3>
+        <p>Risk analysis and tailored insurance solutions to protect your business and the people behind it.</p>
+        <div class="prod-actions"><a href="/contact" class="prod-btn prod-btn-primary">Get advice</a><a href="/insurance-advice" class="prod-btn prod-btn-ghost">Learn more</a></div>
+      </a>
+    </div>
+
+    <div id="tab-savings" class="tab-panel">
+      <a href="/kiwisaver" class="prod-card fade-up">
+        <span class="prod-cat">KiwiSaver</span>
+        <div class="prod-icon"><i class="fas fa-piggy-bank"></i></div>
+        <h3>KiwiSaver Review</h3>
+        <p>Many Kiwis have never had advice on their KiwiSaver. As your balance grows, that matters more and more.</p>
+        <div class="prod-actions"><a href="/contact" class="prod-btn prod-btn-primary">Get advice</a><a href="/kiwisaver" class="prod-btn prod-btn-ghost">Learn more</a></div>
+      </a>
+    </div>
+
+    <div id="tab-planning" class="tab-panel">
+      <a href="/financial-planning" class="prod-card fade-up">
+        <span class="prod-cat">Financial Planning</span>
+        <div class="prod-icon"><i class="fas fa-map"></i></div>
+        <h3>Financial Planning</h3>
+        <p>A clear picture of where you are, where you want to be, and a regularly reviewed plan to get there.</p>
+        <div class="prod-actions"><a href="/contact" class="prod-btn prod-btn-primary">Get advice</a><a href="/financial-planning" class="prod-btn prod-btn-ghost">Learn more</a></div>
       </a>
     </div>
   </div>
 </section>
 
 <!-- HOW IT WORKS -->
-<section class="how-section" aria-labelledby="how-heading">
-  <div class="section-inner">
-    <p class="section-eyebrow fade-up" style="color:var(--gold);">How it works</p>
-    <h2 class="section-heading fade-up" id="how-heading">Simple, stress-free process</h2>
-    <p class="section-sub fade-up" style="color:var(--mist); margin-bottom: 56px;">No jargon. No pressure. Just clear advice and a team in your corner.</p>
-
-    <div class="steps-grid">
-      <div class="step fade-up">
-        <div class="step-num">1</div>
+<section class="how-section" aria-labelledby="how-h2">
+  <div class="w">
+    <p class="sec-eye fade-up" style="color:var(--gold)">How it works</p>
+    <h2 class="sec-h2 fade-up" id="how-h2">Simple. Stress-free. Personal.</h2>
+    <p class="sec-sub fade-up" style="color:var(--mist);margin-bottom:48px;">No jargon. No pressure. Just clear advice from people who are genuinely on your side.</p>
+    <div class="steps">
+      <div class="step-card fade-up">
+        <div class="step-num-big" aria-hidden="true">1</div>
+        <div class="step-dot"><i class="fas fa-comments" aria-hidden="true"></i></div>
         <h4>Tell us your situation</h4>
-        <p>A no-obligation chat — by phone, video or in person. You talk, we listen. No paperwork, no pressure.</p>
+        <p>A no-obligation conversation — by phone, video or in person. You talk, we listen. No paperwork, no pressure. Available 7 days a week.</p>
       </div>
-      <div class="step fade-up">
-        <div class="step-num">2</div>
+      <div class="step-card fade-up">
+        <div class="step-num-big" aria-hidden="true">2</div>
+        <div class="step-dot"><i class="fas fa-magnifying-glass-chart" aria-hidden="true"></i></div>
         <h4>We do the legwork</h4>
-        <p>We assess your options across the market, handle the lenders or insurers, and present a clear recommendation.</p>
+        <p>We assess your options across the market, handle the lenders or insurers, and present a clear written recommendation in plain English.</p>
       </div>
-      <div class="step fade-up">
-        <div class="step-num">3</div>
+      <div class="step-card fade-up">
+        <div class="step-num-big" aria-hidden="true">3</div>
+        <div class="step-dot"><i class="fas fa-handshake" aria-hidden="true"></i></div>
         <h4>We stay with you</h4>
-        <p>Mortgages refix, life changes, goals shift. We're not a one-off service — we're your long-term advisers.</p>
+        <p>Mortgages refix. Life changes. Goals shift. We're not a one-off service — we're your long-term advisers, available whenever you need us.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- REVIEWS -->
-<section class="reviews-section" aria-labelledby="reviews-heading">
-  <div class="section-inner">
-    <p class="section-eyebrow fade-up">Client stories</p>
-    <h2 class="section-heading fade-up" id="reviews-heading">Real people. Real results.</h2>
-    <p class="section-sub fade-up">Don't just take our word for it.</p>
-
+<section class="reviews-section" aria-labelledby="reviews-h2">
+  <div class="w">
+    <p class="sec-eye fade-up">Client stories</p>
+    <h2 class="sec-h2 fade-up" id="reviews-h2">Real people. Real results.</h2>
+    <p class="sec-sub fade-up">Don't just take our word for it.</p>
     <div class="reviews-grid">
       <div class="review-card fade-up">
         <div class="review-stars">★★★★★</div>
-        <div class="review-divider"></div>
+        <div class="review-bar"></div>
         <p class="review-text">"Alan and the team made buying our first home so much less scary. They explained everything clearly and were available whenever we had questions — even on weekends."</p>
-        <div>
-          <div class="review-author">Sarah & Tom B.</div>
-          <div class="review-type">First Home Buyers</div>
-        </div>
+        <div class="review-author">Sarah & Tom B.</div>
+        <div class="review-type">First Home Buyers, Wellington</div>
       </div>
       <div class="review-card fade-up">
         <div class="review-stars">★★★★★</div>
-        <div class="review-divider"></div>
+        <div class="review-bar"></div>
         <p class="review-text">"We'd never thought seriously about life insurance until DUX sat down with us. Now I feel like our family is actually protected. Wish we'd done it years ago."</p>
-        <div>
-          <div class="review-author">Marcus H.</div>
-          <div class="review-type">Insurance Client</div>
-        </div>
+        <div class="review-author">Marcus H.</div>
+        <div class="review-type">Insurance Client</div>
       </div>
       <div class="review-card fade-up">
         <div class="review-stars">★★★★★</div>
-        <div class="review-divider"></div>
-        <p class="review-text">"Brilliant service from start to finish. They helped us restructure our mortgage and saved us thousands in interest — and didn't try to upsell us on anything we didn't need."</p>
-        <div>
-          <div class="review-author">Lisa & David K.</div>
-          <div class="review-type">Mortgage Refinance</div>
-        </div>
+        <div class="review-bar"></div>
+        <p class="review-text">"Brilliant service from start to finish. They restructured our mortgage and saved us thousands in interest — and didn't try to upsell us on anything we didn't need."</p>
+        <div class="review-author">Lisa & David K.</div>
+        <div class="review-type">Mortgage Refinance</div>
       </div>
+    </div>
+    <div style="text-align:center;margin-top:40px;">
+      <a href="/reviews" class="btn-dark" style="display:inline-block;">Read all reviews</a>
     </div>
   </div>
 </section>
 
-<!-- TEAM STRIP -->
-<div class="team-strip">
-  <div class="team-strip-inner">
-    <div class="team-strip-text">
-      <h3>A team of five advisers, backed by a full support team</h3>
-      <p>Financial advisers, mortgage specialists, KiwiSaver experts and a dedicated admin team — all under one roof in Wellington.</p>
+<!-- TEAM -->
+<div class="team-section">
+  <div class="team-inner">
+    <div class="team-text">
+      <h3>Five advisers. One dedicated team.</h3>
+      <p>Financial advisers, mortgage specialists, KiwiSaver experts and a full support team — all under one roof in Wellington, NZ.</p>
     </div>
-    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
-      <div class="team-avatars" aria-label="Team members">
-        <div class="avatar" title="Alan Borthwick">AB</div>
-        <div class="avatar" title="Sam">SH</div>
-        <div class="avatar" title="Adviser">MB</div>
-        <div class="avatar" title="Adviser">TB</div>
-        <div class="avatar" title="Adviser">ML</div>
-        <div class="avatar avatar-more" title="And more">+5</div>
+    <div class="team-right">
+      <div class="avatars" aria-label="Team members">
+        <div class="av" title="Alan Borthwick">AB</div>
+        <div class="av" title="Sam">SH</div>
+        <div class="av" title="Adviser">MB</div>
+        <div class="av" title="Adviser">TB</div>
+        <div class="av" title="Adviser">ML</div>
+        <div class="av av-more">+5</div>
       </div>
-      <a href="/staff" class="btn-primary" style="background:var(--navy);color:var(--cream);">Meet the team</a>
+      <a href="/staff" class="btn-primary">Meet the team</a>
     </div>
   </div>
 </div>
 
 <!-- CTA -->
-<section class="cta-strip" aria-labelledby="cta-heading">
-  <div class="cta-strip-inner">
-    <div>
-      <h2 id="cta-heading">Not sure where to start?<br>A free conversation costs nothing.</h2>
-      <p class="cta-sub">Available by phone, video call or in person. 7 days a week.</p>
+<section class="cta-strip" aria-labelledby="cta-h2">
+  <div class="cta-inner">
+    <div class="cta-text">
+      <h2 id="cta-h2">Not sure where to start?<br>A free conversation costs nothing.</h2>
+      <p>Available by phone, video or in person. 7 days a week.</p>
     </div>
     <a href="/contact" class="btn-dark">Book your free chat today</a>
   </div>
@@ -1002,32 +1292,31 @@
 <footer>
   <div class="footer-top">
     <div>
-      <div class="footer-brand-mark">DUX</div>
+      <div class="footer-brand-name">DUX</div>
       <div class="footer-brand-sub">Financial Services</div>
+      <p class="footer-desc">Independent financial advisers based in Wellington, NZ. Mortgage finance, insurance, KiwiSaver and financial planning — built around your life.</p>
       <div class="footer-contact">
-        <a href="tel:0800000987"><i class="fas fa-phone" aria-hidden="true"></i> 0800 000 987</a>
-        <a href="mailto:admin@duxfinancial.co.nz"><i class="fas fa-envelope" aria-hidden="true"></i> admin@duxfinancial.co.nz</a>
-        <a href="#"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Wellington, New Zealand</a>
+        <a href="tel:0800000987"><i class="fas fa-phone"></i> 0800 000 987</a>
+        <a href="mailto:admin@duxfinancial.co.nz"><i class="fas fa-envelope"></i> admin@duxfinancial.co.nz</a>
+        <a href="#"><i class="fas fa-map-marker-alt"></i> Wellington, New Zealand</a>
       </div>
     </div>
-
     <div class="footer-col">
       <h4>Services</h4>
       <a href="/mortgage-finance">Mortgage Finance</a>
       <a href="/insurance-advice">Insurance Advice</a>
       <a href="/kiwisaver">KiwiSaver</a>
       <a href="/financial-planning">Financial Planning</a>
+      <a href="/employers-community">Employers & Community</a>
     </div>
-
     <div class="footer-col">
       <h4>Company</h4>
       <a href="/staff">About Us</a>
       <a href="/dux-talk">DUX Talk</a>
-      <a href="/employers-community">Employers & Community</a>
       <a href="/reviews">Reviews</a>
       <a href="/careers">Careers</a>
+      <a href="/contact">Contact Us</a>
     </div>
-
     <div class="footer-col">
       <h4>Legal</h4>
       <a href="/disclosure">Disclosure</a>
@@ -1035,31 +1324,37 @@
       <a href="/resources">Resources</a>
     </div>
   </div>
-
   <div class="footer-bottom">
-    <p class="footer-copy">© 2025 DUX Financial Services. All rights reserved.</p>
+    <p class="footer-legal">DUX Financial Services is a Licensed Financial Advice Provider. © 2025 DUX Financial Services. All rights reserved.</p>
     <div class="footer-social">
-      <a href="https://www.facebook.com/DuxFinancial/" aria-label="DUX Financial on Facebook" target="_blank" rel="noopener">
-        <i class="fab fa-facebook-f" aria-hidden="true"></i>
-      </a>
-      <a href="https://nz.linkedin.com/company/dux-financial" aria-label="DUX Financial on LinkedIn" target="_blank" rel="noopener">
-        <i class="fab fa-linkedin-in" aria-hidden="true"></i>
-      </a>
+      <a href="https://www.facebook.com/DuxFinancial/" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://nz.linkedin.com/company/dux-financial" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
     </div>
   </div>
 </footer>
 
 <script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
+function switchTab(e, id) {
+  document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  e.currentTarget.classList.add('active');
+  e.currentTarget.setAttribute('aria-selected','true');
+  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelectorAll('#tab-' + id + ' .fade-up').forEach((el,i) => {
+    el.classList.remove('vis');
+    setTimeout(() => el.classList.add('vis'), i * 60);
+  });
+}
 
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('vis'), (i % 4) * 80);
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 </script>
 </body>
 </html>
