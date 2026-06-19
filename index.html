@@ -1,0 +1,529 @@
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body, .dux-root { font-family: 'Inter', sans-serif; }
+
+.dux-root {
+  background: #F7F5F0;
+  color: #0D1B2A;
+  overflow-x: hidden;
+}
+
+.dux-nav {
+  background: #0D1B2A;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  height: 64px;
+}
+.dux-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: #C9A84C;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+}
+.dux-logo span {
+  color: #F7F5F0;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-left: 10px;
+  vertical-align: middle;
+  opacity: 0.7;
+}
+.dux-nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+.dux-nav-links a {
+  color: #B8C4D0;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+.dux-nav-links a:hover { color: #F7F5F0; }
+.dux-nav-cta {
+  background: #C9A84C;
+  color: #0D1B2A !important;
+  padding: 8px 18px;
+  border-radius: 4px;
+  font-weight: 600 !important;
+}
+
+.dux-hero {
+  background: #0D1B2A;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  min-height: 520px;
+}
+.dux-hero-bg-letter {
+  position: absolute;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 520px;
+  font-weight: 700;
+  color: #C9A84C;
+  opacity: 0.04;
+  right: -40px;
+  top: -60px;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+.dux-hero-left {
+  padding: 72px 56px 72px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+.dux-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #C9A84C;
+  margin-bottom: 20px;
+}
+.dux-hero-h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px;
+  font-weight: 700;
+  color: #F7F5F0;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.dux-hero-h1 em {
+  color: #C9A84C;
+  font-style: italic;
+}
+.dux-hero-sub {
+  font-size: 17px;
+  color: #8CA0B5;
+  line-height: 1.6;
+  max-width: 440px;
+  margin-bottom: 36px;
+}
+.dux-hero-actions {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.btn-primary {
+  background: #C9A84C;
+  color: #0D1B2A;
+  padding: 14px 28px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  border: none;
+  display: inline-block;
+}
+.btn-ghost {
+  color: #F7F5F0;
+  padding: 14px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  opacity: 0.7;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-ghost:hover { opacity: 1; }
+
+.dux-hero-right {
+  background: rgba(201,168,76,0.08);
+  border-left: 1px solid rgba(201,168,76,0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 48px 40px;
+  position: relative;
+  z-index: 1;
+}
+.trust-stat {
+  margin-bottom: 36px;
+}
+.trust-stat:last-child { margin-bottom: 0; }
+.trust-stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: #C9A84C;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.trust-stat-label {
+  font-size: 13px;
+  color: #8CA0B5;
+  line-height: 1.4;
+}
+.trust-divider {
+  width: 32px;
+  height: 1px;
+  background: rgba(201,168,76,0.3);
+  margin: 0 0 36px;
+}
+
+.dux-trust-bar {
+  background: #F0EDE6;
+  border-bottom: 1px solid #E0DDD5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  padding: 16px 48px;
+  flex-wrap: wrap;
+}
+.trust-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #5C6E82;
+}
+.trust-pill i { font-size: 16px; color: #C9A84C; }
+
+.dux-section {
+  padding: 72px 48px;
+}
+.dux-section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #C9A84C;
+  margin-bottom: 12px;
+}
+.dux-section-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: #0D1B2A;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+.dux-section-sub {
+  font-size: 16px;
+  color: #5C6E82;
+  margin-bottom: 48px;
+  max-width: 520px;
+  line-height: 1.6;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.service-card {
+  background: #fff;
+  border: 1px solid #E8E5DE;
+  border-radius: 8px;
+  padding: 28px 24px;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+.service-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: #C9A84C;
+  transform: scaleX(0);
+  transition: transform 0.2s;
+  transform-origin: left;
+}
+.service-card:hover { border-color: #C9A84C; transform: translateY(-2px); }
+.service-card:hover::after { transform: scaleX(1); }
+.service-icon {
+  width: 44px;
+  height: 44px;
+  background: #F0EDE6;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.service-icon i { font-size: 22px; color: #C9A84C; }
+.service-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0D1B2A;
+  margin-bottom: 8px;
+}
+.service-card p {
+  font-size: 14px;
+  color: #5C6E82;
+  line-height: 1.6;
+}
+.service-arrow {
+  margin-top: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #C9A84C;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dux-reviews {
+  background: #0D1B2A;
+  padding: 72px 48px;
+}
+.dux-reviews .dux-section-heading { color: #F7F5F0; }
+.dux-reviews .dux-section-sub { color: #8CA0B5; }
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.review-card {
+  background: rgba(247,245,240,0.05);
+  border: 1px solid rgba(247,245,240,0.1);
+  border-radius: 8px;
+  padding: 24px;
+}
+.review-stars {
+  color: #C9A84C;
+  font-size: 14px;
+  margin-bottom: 12px;
+  letter-spacing: 2px;
+}
+.review-text {
+  font-size: 14px;
+  color: #B8C4D0;
+  line-height: 1.7;
+  margin-bottom: 16px;
+  font-style: italic;
+}
+.review-author {
+  font-size: 13px;
+  font-weight: 600;
+  color: #F7F5F0;
+}
+.review-type {
+  font-size: 12px;
+  color: #5C6E82;
+  margin-top: 2px;
+}
+
+.dux-cta-strip {
+  background: #C9A84C;
+  padding: 56px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+.dux-cta-strip h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: #0D1B2A;
+  max-width: 480px;
+  line-height: 1.2;
+}
+.btn-dark {
+  background: #0D1B2A;
+  color: #F7F5F0;
+  padding: 16px 32px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  border: none;
+  display: inline-block;
+}
+
+.dux-footer {
+  background: #080F16;
+  padding: 40px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: #C9A84C;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+.footer-links {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.footer-links a {
+  font-size: 12px;
+  color: #5C6E82;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+}
+.footer-links a:hover { color: #B8C4D0; }
+.footer-copy {
+  font-size: 12px;
+  color: #3A4A5A;
+}
+</style>
+
+<div class="dux-root">
+
+  <nav class="dux-nav" role="navigation" aria-label="Main navigation">
+    <div class="dux-logo">DUX <span>Financial Services</span></div>
+    <ul class="dux-nav-links">
+      <li><a href="#">About us</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">DUX Talk</a></li>
+      <li><a href="#">Reviews</a></li>
+      <li><a href="#" class="dux-nav-cta">Book a chat</a></li>
+    </ul>
+  </nav>
+
+  <section class="dux-hero" aria-label="Hero">
+    <div class="dux-hero-bg-letter" aria-hidden="true">D</div>
+    <div class="dux-hero-left">
+      <p class="dux-eyebrow">Wellington · New Zealand</p>
+      <h1 class="dux-hero-h1">
+        Focus on what<br>
+        matters most.<br>
+        <em>We'll handle the rest.</em>
+      </h1>
+      <p class="dux-hero-sub">
+        Tailored mortgage, insurance, KiwiSaver and financial planning advice — built around your life, not a product brochure.
+      </p>
+      <div class="dux-hero-actions">
+        <a href="#" class="btn-primary">Book a free chat</a>
+        <a href="#" class="btn-ghost">Our services <i class="ti ti-arrow-right" aria-hidden="true"></i></a>
+      </div>
+    </div>
+    <div class="dux-hero-right">
+      <div class="trust-stat">
+        <div class="trust-stat-num">20+</div>
+        <div class="trust-stat-label">Years of combined<br>adviser experience</div>
+      </div>
+      <div class="trust-divider"></div>
+      <div class="trust-stat">
+        <div class="trust-stat-num">5★</div>
+        <div class="trust-stat-label">Client satisfaction<br>across 100+ reviews</div>
+      </div>
+      <div class="trust-divider"></div>
+      <div class="trust-stat">
+        <div class="trust-stat-num">7</div>
+        <div class="trust-stat-label">Days a week —<br>we're available when you need us</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="dux-trust-bar" role="list" aria-label="Credentials">
+    <div class="trust-pill" role="listitem"><i class="ti ti-shield-check" aria-hidden="true"></i> Licensed Financial Advice Provider</div>
+    <div class="trust-pill" role="listitem"><i class="ti ti-award" aria-hidden="true"></i> FMA Registered Advisers</div>
+    <div class="trust-pill" role="listitem"><i class="ti ti-users" aria-hidden="true"></i> Independent — we work for you, not the bank</div>
+    <div class="trust-pill" role="listitem"><i class="ti ti-phone" aria-hidden="true"></i> 0800 000 987</div>
+  </div>
+
+  <section class="dux-section" aria-labelledby="services-heading">
+    <p class="dux-section-label">What we do</p>
+    <h2 class="dux-section-heading" id="services-heading">Advice that fits your life</h2>
+    <p class="dux-section-sub">We don't push products. We listen, understand your goals, then find the right solution — now and into the future.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon"><i class="ti ti-home" aria-hidden="true"></i></div>
+        <h3>Mortgage Finance</h3>
+        <p>First home, investment property, or a build — we navigate the lenders so you don't have to.</p>
+        <div class="service-arrow">Learn more <i class="ti ti-arrow-right" aria-hidden="true"></i></div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="ti ti-shield" aria-hidden="true"></i></div>
+        <h3>Insurance Advice</h3>
+        <p>Life, income, health and more — the right cover for what you actually need, at the right price.</p>
+        <div class="service-arrow">Learn more <i class="ti ti-arrow-right" aria-hidden="true"></i></div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="ti ti-piggy-bank" aria-hidden="true"></i></div>
+        <h3>KiwiSaver</h3>
+        <p>Is your KiwiSaver working as hard as you are? We'll review your fund and make sure it is.</p>
+        <div class="service-arrow">Learn more <i class="ti ti-arrow-right" aria-hidden="true"></i></div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="ti ti-chart-line" aria-hidden="true"></i></div>
+        <h3>Financial Planning</h3>
+        <p>Where are you now, and where do you want to be? We'll map the road and keep you on it.</p>
+        <div class="service-arrow">Learn more <i class="ti ti-arrow-right" aria-hidden="true"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dux-reviews" aria-labelledby="reviews-heading">
+    <p class="dux-section-label">Client stories</p>
+    <h2 class="dux-section-heading" id="reviews-heading">Real people. Real results.</h2>
+    <p class="dux-section-sub" style="margin-bottom:40px;">Don't just take our word for it.</p>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Alan and the team made buying our first home so much less scary. They explained everything clearly and were available whenever we had questions — even on weekends."</p>
+        <div class="review-author">Sarah & Tom B.</div>
+        <div class="review-type">First Home Buyers</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"We'd never thought seriously about life insurance until DUX sat down with us. Now I feel like our family is actually protected. Wish we'd done it years ago."</p>
+        <div class="review-author">Marcus H.</div>
+        <div class="review-type">Insurance Client</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Brilliant service from start to finish. They helped us restructure our mortgage and saved us thousands in interest — and didn't try to upsell us on anything we didn't need."</p>
+        <div class="review-author">Lisa & David K.</div>
+        <div class="review-type">Mortgage Refinance</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="dux-cta-strip" role="complementary" aria-label="Call to action">
+    <h2>Not sure where to start? <br>A free conversation costs nothing.</h2>
+    <a href="#" class="btn-dark">Book your free chat today</a>
+  </div>
+
+  <footer class="dux-footer" role="contentinfo">
+    <div class="footer-logo">DUX</div>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="#">About us</a>
+      <a href="#">Services</a>
+      <a href="#">Reviews</a>
+      <a href="#">Contact</a>
+      <a href="#">Disclosure</a>
+      <a href="#">Privacy policy</a>
+    </nav>
+    <div class="footer-copy">© 2025 DUX Financial Services</div>
+  </footer>
+
+</div>
