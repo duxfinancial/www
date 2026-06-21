@@ -1,0 +1,648 @@
+                  <section id="in-the-spotlight" class="section-spacing--tier-1" style="position:relative">
+                     <!-- Spotlight slider component :: START-->
+                     <style>
+                        .motion-slider {
+                        border-radius: 15px;
+                        min-height:auto;
+                        }
+                        .center, .motion-slider ul {
+                        align-items: center;
+                        height: 725px;
+                        justify-content: center;
+                        }
+                        .bg-shape {
+                        display:block !important;
+                        }
+                     </style>
+                     <style>
+                        .line, .motion-slider, .motion-slider li, .motion-slider li img {
+                        width: 100%;
+                        }
+                        .motion-slider {
+                        width: 97% !important;
+                        }
+                        .flex, .center, .motion-slider ul, .motion-slider-wrapper {
+                        display: flex;
+                        }
+                        .motion-slider-wrapper {
+                        position: relative;
+                        max-width: 610px;
+                        margin: 50px;
+                        }
+                        .motion-slider-wrapper input {
+                        display: none;
+                        }
+                        .motion-slider ul {
+                        position: relative;
+                        list-style: none;
+                        margin: 0;
+                        padding: 0;
+                        height: 100%;
+                        width: calc(100% *  5  );
+                        transition: left 0.3s cubic-bezier(0.77, 0, 0.175, 1) 0s
+                        }
+                        .motion-slider li img {
+                        border-radius: 15px;
+                        }
+                        .nav-dot {
+                        position: absolute;
+                        cursor: pointer;
+                        margin-left: -7.5px;
+                        bottom: -22.5px;
+                        width: 15px;
+                        height: 15px;
+                        opacity: 0.5;
+                        background-color: white;
+                        border-radius: 50%;
+                        transition: 0.4s;
+                        }
+                        .nav-dot:hover {
+                        opacity: 0.8;
+                        transform: scale(1.2);
+                        }
+                        .nav-dot:active {
+                        transform: scale(0.9);
+                        }
+                        .nav-dot[for=slide1] {
+                        left: 40%;
+                        }
+                        #slide1:checked ~ .motion-slider ul {
+                        left: 0%;
+                        }
+                        #slide1:checked ~ .nav-dot[for=slide1] {
+                        opacity: 1;
+                        }
+                        .nav-dot[for=slide2] {
+                        left: 45%;
+                        }
+                        #slide2:checked ~ .motion-slider ul {
+                        left: -100%;
+                        }
+                        #slide2:checked ~ .nav-dot[for=slide2] {
+                        opacity: 1;
+                        }
+                        .nav-dot[for=slide3] {
+                        left: 50%;
+                        }
+                        #slide3:checked ~ .motion-slider ul {
+                        left: -200%;
+                        }
+                        #slide1:checked ~ .motion-slider ul #motion-card-slide1 {
+                        -webkit-transform: scale(1.12);
+                        -moz-transform: scale(1.12);
+                        -ms-transform: scale(1.12);
+                        -o-transform: scale(1.12);
+                        transform: scale(1.12);
+                        transition: 0.3s ease-in-out 0.2s;
+                        position: relative;
+                        z-index: 2;
+                        }
+                        #slide1:not(:checked) ~ .motion-slider ul #motion-card-slide1 {
+                        -webkit-transform: scale(1);
+                        -moz-transform: scale(1);
+                        -ms-transform: scale(1);
+                        -o-transform: scale(1);
+                        transform: scale(1);
+                        transition: 0.3s ease-in-out 0.2s;
+                        position: relative;
+                        z-index: 2;
+                        opacity: 0.5;
+                        }
+                        #slide2:checked ~ .motion-slider ul #motion-card-slide2 {
+                        -webkit-transform: scale(1.12);
+                        -moz-transform: scale(1.12);
+                        -ms-transform: scale(1.12);
+                        -o-transform: scale(1.12);
+                        transform: scale(1.12);
+                        transition: 0.3s ease-in-out 0.2s;
+                        position: relative;
+                        z-index: 2;
+                        }
+                        #slide2:not(:checked) ~ .motion-slider ul #motion-card-slide2 {
+                        -webkit-transform: scale(1);
+                        -moz-transform: scale(1);
+                        -ms-transform: scale(1);
+                        -o-transform: scale(1);
+                        transform: scale(1);
+                        transition: 0.3s ease-in-out 0.2s;
+                        position: relative;
+                        z-index: 2;
+                        opacity: 0.5;
+                        }
+                        #slide3:checked ~ .motion-slider ul #motion-card-slide3 {
+                        -webkit-transform: scale(1.12);
+                        -moz-transform: scale(1.12);
+                        -ms-transform: scale(1.12);
+                        -o-transform: scale(1.12);
+                        transform: scale(1.12);
+                        transition: 0.3s ease-in-out 0.2s;
+                        position: relative;
+                        z-index: 2;
+                        }
+                        #slide3:not(:checked) ~ .motion-slider ul #motion-card-slide3 {
+                        -webkit-transform: scale(1);
+                        -moz-transform: scale(1);
+                        -ms-transform: scale(1);
+                        -o-transform: scale(1);
+                        transform: scale(1);
+                        transition: 0.3s ease-in-out 0.2s;
+                        position: relative;
+                        z-index: 2;
+                        opacity: 0.5;
+                        }
+                        #slide4:checked ~ .motion-slider ul #motion-card-slide4 {
+                        -webkit-transform: scale(1.12);
+                        -moz-transform: scale(1.12);
+                        -ms-transform: scale(1.12);
+                        -o-transform: scale(1.12);
+                        transform: scale(1.12);
+                        transition: 0.3s ease-in-out 0.2s;
+                        position: relative;
+                        z-index: 2;
+                        }
+                        #slide4:not(:checked) ~ .motion-slider ul #motion-card-slide4 {
+                        -webkit-transform: scale(1);
+                        -moz-transform: scale(1);
+                        -ms-transform: scale(1);
+                        -o-transform: scale(1);
+                        transform: scale(1);
+                        transition: 0.3s ease-in-out 0.2s;
+                        position: relative;
+                        z-index: 2;
+                        opacity: 0.5;
+                        }
+                        #slide5:checked ~ .motion-slider ul #motion-card-slide5 {
+                        -webkit-transform: scale(1.12);
+                        -moz-transform: scale(1.12);
+                        -ms-transform: scale(1.12);
+                        -o-transform: scale(1.12);
+                        transform: scale(1.12);
+                        transition: 0.3s ease-in-out 0.2s;
+                        position: relative;
+                        z-index: 2;
+                        }
+                        #slide5:not(:checked) ~ .motion-slider ul #motion-card-slide5 {
+                        -webkit-transform: scale(1);
+                        -moz-transform: scale(1);
+                        -ms-transform: scale(1);
+                        -o-transform: scale(1);
+                        transform: scale(1);
+                        transition: 0.3s ease-in-out 0.2s;
+                        position: relative;
+                        z-index: 2;
+                        opacity: 0.5;
+                        }
+                        #slide6:checked ~ .motion-slider ul #motion-card-slide6 {
+                        -webkit-transform: scale(1.12);
+                        -moz-transform: scale(1.12);
+                        -ms-transform: scale(1.12);
+                        -o-transform: scale(1.12);
+                        transform: scale(1.12);
+                        transition: 0.3s ease-in-out 0.2s;
+                        position: relative;
+                        z-index: 2;
+                        }
+                        #slide6:not(:checked) ~ .motion-slider ul #motion-card-slide6 {
+                        -webkit-transform: scale(1);
+                        -moz-transform: scale(1);
+                        -ms-transform: scale(1);
+                        -o-transform: scale(1);
+                        transform: scale(1);
+                        transition: 0.3s ease-in-out 0.2s;
+                        position: relative;
+                        z-index: 2;
+                        opacity: 0.5;
+                        }
+                        #slide7:checked ~ .motion-slider ul #motion-card-slide7 {
+                        -webkit-transform: scale(1.12);
+                        -moz-transform: scale(1.12);
+                        -ms-transform: scale(1.12);
+                        -o-transform: scale(1.12);
+                        transform: scale(1.12);
+                        transition: 0.3s ease-in-out 0.2s;
+                        position: relative;
+                        z-index: 2;
+                        }
+                        #slide7:not(:checked) ~ .motion-slider ul #motion-card-slide7 {
+                        -webkit-transform: scale(1);
+                        -moz-transform: scale(1);
+                        -ms-transform: scale(1);
+                        -o-transform: scale(1);
+                        transform: scale(1);
+                        transition: 0.3s ease-in-out 0.2s;
+                        position: relative;
+                        z-index: 2;
+                        opacity: 0.5;
+                        }
+                        #slide8:checked ~ .motion-slider ul #motion-card-slide8 {
+                        -webkit-transform: scale(1.12);
+                        -moz-transform: scale(1.12);
+                        -ms-transform: scale(1.12);
+                        -o-transform: scale(1.12);
+                        transform: scale(1.12);
+                        transition: 0.3s ease-in-out 0.2s;
+                        position: relative;
+                        z-index: 2;
+                        }
+                        #slide8:not(:checked) ~ .motion-slider ul #motion-card-slide8 {
+                        -webkit-transform: scale(1);
+                        -moz-transform: scale(1);
+                        -ms-transform: scale(1);
+                        -o-transform: scale(1);
+                        transform: scale(1);
+                        transition: 0.3s ease-in-out 0.2s;
+                        position: relative;
+                        z-index: 2;
+                        opacity: 0.5;
+                        }
+                        #slide9:checked ~ .motion-slider ul #motion-card-slide9 {
+                        -webkit-transform: scale(1.12);
+                        -moz-transform: scale(1.12);
+                        -ms-transform: scale(1.12);
+                        -o-transform: scale(1.12);
+                        transform: scale(1.12);
+                        transition: 0.3s ease-in-out 0.2s;
+                        position: relative;
+                        z-index: 2;
+                        }
+                        #slide9:not(:checked) ~ .motion-slider ul #motion-card-slide9 {
+                        -webkit-transform: scale(1);
+                        -moz-transform: scale(1);
+                        -ms-transform: scale(1);
+                        -o-transform: scale(1);
+                        transform: scale(1);
+                        transition: 0.3s ease-in-out 0.2s;
+                        position: relative;
+                        z-index: 2;
+                        opacity: 0.5;
+                        }
+                        #slide3:checked ~ .nav-dot[for=slide3] {
+                        opacity: 1;
+                        }
+                        .nav-dot[for=slide4] {
+                        left: 55%;
+                        }
+                        #slide4:checked ~ .motion-slider ul {
+                        left: -300%;
+                        }
+                        #slide4:checked ~ .nav-dot[for=slide4] {
+                        opacity: 1;
+                        }
+                        .nav-dot[for=slide5] {
+                        left: 60%;
+                        }
+                        #slide5:checked ~ .motion-slider ul {
+                        left: -400%;
+                        }
+                        #slide6:checked ~ .motion-slider ul {
+                        left: -500%;
+                        }
+                        #slide7:checked ~ .motion-slider ul {
+                        left: -600%;
+                        }
+                        #slide8:checked ~ .motion-slider ul {
+                        left: -700%;
+                        }
+                        #slide9:checked ~ .motion-slider ul {
+                        left: -800%;
+                        }
+                        #slide5:checked ~ .nav-dot[for=slide5] {
+                        opacity: 1;
+                        }
+                        .left-arrow, .right-arrow {
+                        display: none;
+                        position: absolute;
+                        cursor: pointer;
+                        /*bottom: -10%;*/
+                        bottom: -18%;
+                        width: 50px;
+                        height: 50px;
+                        z-index: 1;
+                        font-size: 25px;
+                        transition: 0.2s;
+                        background-color: #f83a30;
+                        border-radius: 100%;
+                        color: #fff;
+                        }
+                        .left-arrow:hover, .right-arrow:hover {
+                        opacity: 1;
+                        transform: scale(1.2);
+                        }
+                        .left-arrow:active, .right-arrow:active {
+                        transform: scale(0.9);
+                        }
+                        .left-arrow {
+                        left: 36%;
+                        }
+                        .right-arrow .mdc-button__icon,
+                        .left-arrow .mdc-button__icon {
+                        font-size: 32px;
+                        height: 100%;
+                        display: inline-flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 100%;
+                        margin: auto 0;
+                        }
+                        .right-arrow {
+                        right: 37%;
+                        }
+                        .testcount {
+                        width: 5;
+                        }
+                        .signature {
+                        margin-top: 100px;
+                        bottom: 0;
+                        font-family: "Quicksand";
+                        color: rgba(150, 150, 170, );
+                        text-shadow: 0 2.5px rgba(0, 0, 0, 0.25);
+                        }
+                        .signature .name {
+                        color: white;
+                        }
+                        .signature .dot {
+                        margin: 0 5px;
+                        }
+                        .signature a {
+                        color: white;
+                        text-decoration: underline;
+                        }
+                        /* Motion Spotlight Slider styling */
+                        .motion-spotlight-slider {
+                        /*overflow: hidden;*/
+                        overflow: visible;
+                        scale: 0.95;
+                        }
+                        .motion-card-slide {
+                        display:inline-grid;
+                        justify-items: center;
+                        text-align: center;
+                        }
+                        .motion-card-slide .mdc-card {
+                        width: 500px;
+                        }
+                        @media (min-width: 803.98px) and (max-width: 1359.98px) {
+                        .motion-spotlight-slider {
+                        scale: 0.85 !important;
+                        overflow: visible !important;
+                        }
+                        .motion-spotlight-slider  #market-leading-insurance-rewards-header {
+                        scale: 1.2 !important;
+                        }
+                        }
+                        @media (min-width: 515px) and (max-width: 803.98px) {
+                        .motion-card-slide .mdc-card {
+                        width: 450px;
+                        }
+                        }
+                        @media (max-width: 514.98px) {
+                        .motion-card-slide .mdc-card {
+                        width: 300px;
+                        }
+                        }
+                     </style>
+                     <style>
+                        /* First slide: link back to first */
+                        #slide1:checked ~ .left-arrow[for=slide5] {
+                        display: block;
+                        }
+                        #slide1:checked ~ .right-arrow[for=slide2] {
+                        display: block;
+                        }
+                        #slide2:checked ~ .left-arrow[for=slide1] {
+                        display: block;
+                        }
+                        #slide2:checked ~ .right-arrow[for=slide3] {
+                        display: block;
+                        }
+                        #slide3:checked ~ .left-arrow[for=slide2] {
+                        display: block;
+                        }
+                        #slide3:checked ~ .right-arrow[for=slide4] {
+                        display: block;
+                        }
+                        #slide4:checked ~ .left-arrow[for=slide3] {
+                        display: block;
+                        }
+                        #slide4:checked ~ .right-arrow[for=slide5] {
+                        display: block;
+                        }
+                        #slide5:checked ~ .left-arrow[for=slide4] {
+                        display: block;
+                        }
+                        /* Last slide: link back to first */
+                        #slide5:checked ~ .right-arrow[for=slide1] {
+                        display: block;
+                        }
+                     </style>
+                     <style>
+                        #motion-spotlight-slider {
+                        position: relative;
+                        }
+                        body.mdc-theme--background {
+                        background: transparent;
+                        }
+                        .bg-shape {
+                        display:none ;
+                        }
+                        .bg-shape {
+                        position: absolute;
+                        background: #ffffff center no-repeat;
+                        border-radius: 50%;
+                        transform: translate(-50%, -50%);
+                        /* display: flex
+                        ; */
+                        z-index: -10;
+                        margin: auto;
+                        top: 92%;
+                        left: 50%;
+                        aspect-ratio: 1 / 1;
+                        width: 1850px;
+                        height: 1850px;
+                        /* overflow: visible; */
+                        /* justify-content: center; */
+                        /* align-items: center; */
+                        }
+                     </style>
+                     <div class="bg-shape"></div>
+                     <div class="motion-spotlight-slider grid_xl">
+                        <div class="grid section-spacing--tier-1 mb-0">
+                           <section class="page-section text--align-center" id="market-leading-insurance-rewards-header">
+                              <div class="grid__inner grid__inner--layout-c6c ">
+                                 <div class="grid__cell">
+                                    <h2
+                                       class="mdc-typography--headline2"
+                                       >In the spotlight </h2>
+                                 </div>
+                              </div>
+                           </section>
+                        </div>
+                        <div class="center">
+                           <div class="motion-slider-wrapper d-block mt-2">
+                              <!-- abstract radio buttons for slides -->
+                              <input id="slide1" type="radio" name="controls"  />
+                              <input id="slide2" type="radio" name="controls"  />
+                              <input id="slide3" type="radio" name="controls"  checked="checked"  />
+                              <input id="slide4" type="radio" name="controls"  />
+                              <input id="slide5" type="radio" name="controls"  />
+                              <!-- end Slides -->
+                              <!-- arrows -->
+                              <label for="slide1" class="left-arrow"> <span class="material-icons mdc-button__icon" aria-hidden="true">chevron_left</span></label>
+                              <label for="slide2" class="left-arrow"> <span class="material-icons mdc-button__icon" aria-hidden="true">chevron_left</span> </label>
+                              <label for="slide3" class="left-arrow"> <span class="material-icons mdc-button__icon" aria-hidden="true">chevron_left</span></label>
+                              <label for="slide4" class="left-arrow"> <span class="material-icons mdc-button__icon" aria-hidden="true">chevron_left</span> </label>
+                              <label for="slide5" class="left-arrow"> <span class="material-icons mdc-button__icon" aria-hidden="true">chevron_left</span> </label>
+                              <label for="slide6" class="left-arrow"> <span class="material-icons mdc-button__icon" aria-hidden="true">chevron_left</span> </label>
+                              <label for="slide7" class="left-arrow"> <span class="material-icons mdc-button__icon" aria-hidden="true">chevron_left</span> </label>
+                              <label for="slide8" class="left-arrow"> <span class="material-icons mdc-button__icon" aria-hidden="true">chevron_left</span> </label>
+                              <label for="slide9" class="left-arrow"> <span class="material-icons mdc-button__icon" aria-hidden="true">chevron_left</span> </label>
+                              <label for="slide1" class="right-arrow"> <span class="material-icons mdc-button__icon" aria-hidden="true">chevron_right</span></label>
+                              <label for="slide2" class="right-arrow"> <span class="material-icons mdc-button__icon" aria-hidden="true">chevron_right</span> </label>
+                              <label for="slide3" class="right-arrow"> <span class="material-icons mdc-button__icon" aria-hidden="true">chevron_right</span> </label>
+                              <label for="slide4" class="right-arrow"> <span class="material-icons mdc-button__icon" aria-hidden="true">chevron_right</span> </label>
+                              <label for="slide5" class="right-arrow"> <span class="material-icons mdc-button__icon" aria-hidden="true">chevron_right</span> </label>
+                              <label for="slide6" class="right-arrow"> <span class="material-icons mdc-button__icon" aria-hidden="true">chevron_right</span> </label>
+                              <label for="slide7" class="right-arrow"> <span class="material-icons mdc-button__icon" aria-hidden="true">chevron_right</span> </label>
+                              <label for="slide8" class="right-arrow"> <span class="material-icons mdc-button__icon" aria-hidden="true">chevron_right</span> </label>
+                              <label for="slide9" class="right-arrow"> <span class="material-icons mdc-button__icon" aria-hidden="true">chevron_right</span> </label>
+                              <div class="motion-slider">
+                                 <ul class="d-flex">
+                                    <!-- Slides -->
+                                    <li id="motion-card-slide1" class="motion-card-slide">
+                                       <div class="grid__cell">
+                                          <div class="mdc-card ">
+                                             <div class="mdc-card__media mdc-card__media--2-1" style="background-image: url('https://sls-fresco.momentum.co.za/files/images/get-help/finglobal-2-1.webp'); height: auto;width: 100%;" alt="Calculator and laptop being used to review financial figures for the 2026 South African budget and its impact on expats." aria-label="#"></div>
+                                             <div class="mdc-card__content">
+                                                <div
+                                                   class="mdc-typography--overline"
+                                                   >FINGLOBAL</div>
+                                                <h3
+                                                   class="mdc-typography--headline5 text--align-center"
+                                                   >Key tax updates for South Africans living abroad</h3>
+                                                <p
+                                                   class="mdc-typography--body1"
+                                                   >With the dust settled on the 2026 Budget, key updates like higher discretionary allowances and revised spousal donation rules remain important for your offshore tax strategy. See what it means for you.</p>
+                                                <div class="mdc-btn-container mdc-btn-container--column-stack">
+                                                   <a href="momentum/get-help/finglobal-expat-financial-solutions.html#latest-media" class="mdc-button mdc-button--raised motion-button--medium mdc-ripple-upgraded campaigns" target="_self" data-section="Campaign" data-title="FINGLOBAL" data-tagline="Key tax updates for South Africans living abroad" data-caption="" data-position="1" data-image-mobile="https://sls-fresco.momentum.co.za/files/images/get-help/finglobal-2-1.webp" data-image-desktop="https://sls-fresco.momentum.co.za/files/images/get-help/finglobal-2-1.webp" data-click-text="Learn more" data-click-path="/momentum/get-help/finglobal-expat-financial-solutions#latest-media" data-product-name="" data-product-category="">
+                                                   <span
+                                                      class="mdc-button__text"
+                                                      >Learn more</span>
+                                                   </a>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </li>
+                                    <li id="motion-card-slide2" class="motion-card-slide">
+                                       <div class="grid__cell">
+                                          <div class="mdc-card ">
+                                             <div class="mdc-card__media mdc-card__media--2-1" style="background-image: url('https://sls-fresco.momentum.co.za/files/images/homepage/family-moment-life-cover.png'); height: auto;width: 100%;" alt="A smiling mother and young daughter baking a pie together in a warm kitchen, capturing a secure family moment made possible with life cover." aria-label="#"></div>
+                                             <div class="mdc-card__content">
+                                                <div
+                                                   class="mdc-typography--overline"
+                                                   >LIFE INSURANCE</div>
+                                                <h3
+                                                   class="mdc-typography--headline5 text--align-center"
+                                                   >Protection for the life you’re building</h3>
+                                                <p
+                                                   class="mdc-typography--body1"
+                                                   >Get meaningful protection that balances affordability with real financial security for your family. Secure <a class='text--nowrap' href="momentum/personal/products/life-insurance.html">R5 million life cover</a> to plan with confidence and save on your monthly premium.</p>
+                                                <div class="mdc-btn-container mdc-btn-container--column-stack">
+                                                   <a href="momentum/personal/life-insurance/quote/journey.html" class="mdc-button mdc-button--raised motion-button--medium mdc-ripple-upgraded campaigns" target="_self" data-section="Campaign" data-title="LIFE INSURANCE" data-tagline="Protection for the life you’re building" data-caption="" data-position="2" data-image-mobile="https://sls-fresco.momentum.co.za/files/images/homepage/family-moment-life-cover.png" data-image-desktop="https://sls-fresco.momentum.co.za/files/images/homepage/family-moment-life-cover.png" data-click-text="Get your online quote" data-click-path="/momentum/personal/life-insurance/quote/journey" data-product-name="" data-product-category="">
+                                                   <span
+                                                      class="mdc-button__text"
+                                                      >Get your online quote</span>
+                                                   </a>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </li>
+                                    <li id="motion-card-slide3" class="motion-card-slide">
+                                       <div class="grid__cell">
+                                          <div class="mdc-card ">
+                                             <div class="mdc-card__media mdc-card__media--2-1" style="background-image: url('https://sls-fresco.momentum.co.za/files/images/careers/career-2-1.webp'); height: auto;width: 100%;" alt="A professional woman in a pinstripe blazer looking out a window, representing financial planning and advisory career opportunities." aria-label="#"></div>
+                                             <div class="mdc-card__content">
+                                                <div
+                                                   class="mdc-typography--overline"
+                                                   >FINANCIAL ADVISER CAREERS</div>
+                                                <h3
+                                                   class="mdc-typography--headline5 text--align-center"
+                                                   >Grow your own advice business</h3>
+                                                <p
+                                                   class="mdc-typography--body1"
+                                                   >Enjoy the freedom of entrepreneurship with the
+                                                   backing, tools and support of one of South Africa's
+                                                   leading financial services brands.
+                                                </p>
+                                                <div class="mdc-btn-container mdc-btn-container--column-stack">
+                                                   <a href="momentum/personal/products/momentum-financial-planning/financial-planners.html" class="mdc-button mdc-button--raised motion-button--medium mdc-ripple-upgraded campaigns" target="_self" data-section="Campaign" data-title="FINANCIAL ADVISER CAREERS" data-tagline="Grow your own advice business" data-caption="" data-position="3" data-image-mobile="https://sls-fresco.momentum.co.za/files/images/careers/career-2-1.webp" data-image-desktop="https://sls-fresco.momentum.co.za/files/images/careers/career-2-1.webp" data-click-text="Learn more" data-click-path="/momentum/about-us/careers/apply-to-become-a-financial-adviser" data-product-name="" data-product-category="">
+                                                   <span
+                                                      class="mdc-button__text"
+                                                      >Learn more</span>
+                                                   </a>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </li>
+                                    <li id="motion-card-slide4" class="motion-card-slide">
+                                       <div class="grid__cell">
+                                          <div class="mdc-card ">
+                                             <div class="mdc-card__media mdc-card__media--2-1" style="background-image: url('https://sls-fresco.momentum.co.za/files/images/estate-plan/momentum-estate-plan-2-1.jpg'); height: auto;width: 100%;" alt="Parents and children smiling at home, showing peace of mind from protecting their legacy with Momentum Estate Plan." aria-label="#"></div>
+                                             <div class="mdc-card__content">
+                                                <div
+                                                   class="mdc-typography--overline"
+                                                   >MOMENTUM TRUST</div>
+                                                <h3
+                                                   class="mdc-typography--headline5 text--align-center"
+                                                   >The Momentum Estate Plan simplifies estate planning</h3>
+                                                <p
+                                                   class="mdc-typography--body1"
+                                                   >
+                                                <p class="mdc-typography--body1">Say goodbye to complicated estate planning! Secure your legacy effortlessly with a solution combining <strong>leading Wills, trusts, and executor</strong> services with <strong>revolutionary estate protection</strong>. </p>
+                                                </p>
+                                                <div class="mdc-btn-container mdc-btn-container--column-stack">
+                                                   <a href="momentum/personal/will-trust-estate/estate-plan.html" class="mdc-button mdc-button--raised motion-button--medium mdc-ripple-upgraded campaigns" target="_self" data-section="Campaign" data-title="MOMENTUM TRUST" data-tagline="The Momentum Estate Plan simplifies estate planning" data-caption="" data-position="4" data-image-mobile="https://sls-fresco.momentum.co.za/files/images/estate-plan/momentum-estate-plan-2-1.jpg" data-image-desktop="https://sls-fresco.momentum.co.za/files/images/estate-plan/momentum-estate-plan-2-1.jpg" data-click-text="Learn more" data-click-path="/momentum/personal/will-trust-estate/estate-plan" data-product-name="" data-product-category="">
+                                                   <span
+                                                      class="mdc-button__text"
+                                                      >Learn more</span>
+                                                   </a>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </li>
+                                    <li id="motion-card-slide5" class="motion-card-slide">
+                                       <div class="grid__cell">
+                                          <div class="mdc-card ">
+                                             <div class="mdc-card__media mdc-card__media--2-1" style="background-image: url('https://sls-fresco.momentum.co.za/files/images/investments/local-investing/reimageining-retirement-2-1.webp'); height: auto;width: 100%;" alt="A woman sits at a dining table in a bright, modern restaurant, holding up a glass in a toast toward another person who is slightly out of focus in the foreground. She has shoulder-length dark hair and is wearing a patterned blouse and a gold necklace. A plated meal and a cup sit in front of her, and the atmosphere appears warm and relaxed." aria-label="#"></div>
+                                             <div class="mdc-card__content">
+                                                <div
+                                                   class="mdc-typography--overline"
+                                                   >GUARANTEED ANNUITIES PORTFOLIO</div>
+                                                <h3
+                                                   class="mdc-typography--headline5 text--align-center"
+                                                   >Reimagining retirement</h3>
+                                                <p
+                                                   class="mdc-typography--body1"
+                                                   >Manage retirement risks by securing part of your income for life with the <a href="momentum/personal/wealth/local-investing/guaranteed-solutions/guaranteed-annuity-portfolio.html">Guaranteed Annuity Portfolio</a>. It offers both certainty and flexibility in <strong>one smart retirement solution</strong>.
+                                                </p>
+                                                <div class="mdc-btn-container mdc-btn-container--column-stack">
+                                                   <a href="momentum/personal/wealth/local-investing/guaranteed-solutions/guaranteed-annuity-portfolio.html" class="mdc-button mdc-button--raised motion-button--medium mdc-ripple-upgraded campaigns" target="_self" data-section="Campaign" data-title="GUARANTEED ANNUITIES PORTFOLIO" data-tagline="Reimagining retirement" data-caption="" data-position="5" data-image-mobile="https://sls-fresco.momentum.co.za/files/images/investments/local-investing/reimageining-retirement-2-1.webp" data-image-desktop="https://sls-fresco.momentum.co.za/files/images/investments/local-investing/reimageining-retirement-2-1.webp" data-click-text="Learn more" data-click-path="/momentum/personal/wealth/local-investing/guaranteed-solutions/guaranteed-annuity-portfolio" data-product-name="" data-product-category="">
+                                                   <span
+                                                      class="mdc-button__text"
+                                                      >Learn more</span>
+                                                   </a>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </li>
+                                    <!-- end Slides -->
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </section>

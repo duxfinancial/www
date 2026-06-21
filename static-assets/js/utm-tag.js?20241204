@@ -1,0 +1,136 @@
+
+
+
+window.getCampaignInfoFromUrl = function(params = window.location.toString()) {
+         if (params.indexOf('?') !== -1) {
+        var querystring = params.split('?');
+
+        var keyValueList = [];
+        if (querystring.length > 1) {
+            var pairs = querystring[1].split('&');
+
+            for (var i = 0; i < pairs.length; i++) {
+                var keyval = pairs[i].split('=');
+                var keyValuePair = {'key': keyval[0], 'value': keyval[1]};
+                keyValueList.push(keyValuePair);
+            }
+        }
+
+        var utm_source;
+        var utm_medium;
+        var utm_campaign;
+        var utm_term;
+        var utm_content;
+        var gclid;
+        var fbclid;
+        var msclkid;
+        var ttclid;
+
+        for (var j = 0; j < keyValueList.length; j++) {
+            if (keyValueList[j].key === 'utm_source') {
+                utm_source = keyValueList[j].value;
+            }
+            if (keyValueList[j].key === 'utm_medium') {
+                utm_medium = keyValueList[j].value;
+            }
+            if (keyValueList[j].key === 'utm_campaign') {
+                utm_campaign = keyValueList[j].value;
+            }
+            if (keyValueList[j].key === 'utm_term') {
+                utm_term = keyValueList[j].value;
+            }
+            if (keyValueList[j].key === 'utm_content') {
+                utm_content = keyValueList[j].value;
+            }
+            if (keyValueList[j].key == 'gclid') {
+                gclid = keyValueList[j].value;
+            }
+            if (keyValueList[j].key === 'fbclid') {
+                fbclid = keyValueList[j].value;
+            }
+            if (keyValueList[j].key === 'msclkid') {
+                msclkid = keyValueList[j].value;
+            }
+            if (keyValueList[j].key === 'ttclid') {
+                ttclid = keyValueList[j].value;
+            }
+            
+        }
+
+        // UTM tags stored in Session Storage
+        if (utm_source && utm_medium) {
+            setCookie('utm_source', utm_source, 30);
+            setCookie('utm_medium', utm_medium, 30);
+            sessionStorage.setItem('utm_source', utm_source);
+            sessionStorage.setItem('utm_medium', utm_medium);
+        } else {
+            deleteCookie('utm_source');
+            deleteCookie('utm_medium');
+        }
+        if (utm_campaign) {
+            setCookie('utm_campaign', utm_campaign, 30);
+            sessionStorage.setItem('utm_campaign', utm_campaign);
+        } else {
+            deleteCookie('utm_campaign');
+        }
+        if (utm_term) {
+            setCookie('utm_term', utm_term, 30);
+            sessionStorage.setItem('utm_term', utm_term);
+        } else {
+            deleteCookie('utm_term');
+        }
+        if (utm_content) {
+            setCookie('utm_content', utm_content, 30);
+            sessionStorage.setItem('utm_content', utm_content);
+        } else {
+            deleteCookie('utm_content');
+        }
+
+        if (gclid) {
+            sessionStorage.setItem('gclid', gclid);
+            setCookie('gclid', gclid, 30);
+            setCookie('clickIdSource', 'Google', 30);
+            setCookie('clickId', gclid, 30);
+        } else {
+            deleteCookie('gclid');
+        }
+        if (fbclid) {
+            sessionStorage.setItem('fbclid', fbclid);
+            setCookie('clickIdSource', 'Facebook', 30);
+            setCookie('clickId', fbclid, 30);
+        }
+        if (msclkid) {
+            sessionStorage.setItem('msclkid', msclkid);
+            setCookie('clickIdSource', 'Microsoft', 30);
+            setCookie('clickId', msclkid, 30);
+        } 
+        
+        if (ttclid) {
+            sessionStorage.setItem('ttclid', ttclid);
+            setCookie('clickIdSource', 'TikTok', 30);
+            setCookie('clickId', ttclid, 30);
+        } 
+
+    } else {
+        var session_utm_source = sessionStorage.getItem('utm_source');
+        var session_utm_medium = sessionStorage.getItem('utm_medium');
+        var session_utm_campaign = sessionStorage.getItem('utm_campaign');
+        var session_utm_term = sessionStorage.getItem('utm_term');
+        var session_utm_content = sessionStorage.getItem('utm_content');
+        if ((session_utm_source && session_utm_campaign && session_utm_source !== 'null' && session_utm_medium !== 'null')
+            || (session_utm_campaign && session_utm_campaign !== 'null') || (session_utm_term && session_utm_term !== 'null')
+            || (session_utm_content && session_utm_content !== 'null')) {
+
+        } else {
+            deleteCookie('utm_source');
+            deleteCookie('utm_medium');
+            deleteCookie('utm_campaign');
+            deleteCookie('utm_term');
+            deleteCookie('utm_content');
+        }
+    }
+    };
+
+document.addEventListener("DOMContentLoaded", function() {
+    getCampaignInfoFromUrl();
+});

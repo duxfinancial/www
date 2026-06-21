@@ -1,0 +1,28 @@
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[5].rules[0].oneOf[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[5].rules[0].oneOf[0].use[2]!./src/styles.css?ngGlobalStyle ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/* You can add global styles to this file, and also import other style files */
+#formSideNav {
+  /*min-width: 255px;*/
+  box-shadow: 0 0 0 0;
+  max-width: 384px!important;
+}
+
+#formSideNav {
+  max-width: 384px!important;
+}
+
+/* Styling to override the mat-spinner-button's 'disabled.active' styling due to changes that Angular material introduced to the disabled state logic - to be moved to Motion global styling */
+.mat-raised-button.mat-accent[disabled].active {
+  background-color: #ff3a30 !important;
+}
+
+
+.cdk-overlay-container {
+
+  z-index: 999999 !important;
+
+}
+
+
+/*# sourceMappingURL=styles.css.map*/

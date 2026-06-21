@@ -1,0 +1,309 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const containers = document.querySelectorAll(".mdc-tab-bar-container");
+
+    containers.forEach(container => {
+        const activeTab = container.querySelector(".mdc-tab-indicator--active")?.closest("[data-meta-tabid]");
+        if (activeTab) {
+            updateActiveTabClasses(activeTab);
+        }
+
+        const containerId = container.id;
+        const defaultTab = container.querySelector("[data-meta-tabid]")?.getAttribute("data-meta-tabid");
+        tabTrigger(defaultTab, containerId);
+    });
+
+    attachSwipeDetectfn();
+    createIndicatorsComponent();
+    calcSliderHeight();
+});
+
+function tabiFyer(setDefaultTab) {
+    tabTrigger(setDefaultTab);
+}
+
+function tabTrigger(defaultTab, containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) {
+        console.error(`Container not found for ID: ${containerId}`);
+        return;
+    }
+
+    const tabTriggers = container.querySelectorAll("[data-meta-tabid]");
+
+    tabsScrollIndicators(container);
+
+    tabTriggers.forEach(trigger => {
+        trigger.addEventListener("click", () => {
+            const tabId = trigger.getAttribute("data-meta-tabid");
+
+            const parentContainer = document.getElementById(
+                containerId.replace("mdc-tabBar-container", "tabs-content-container")
+            );
+
+            tabTriggers.forEach(tab => removeActiveTabClasses(tab));
+
+            updateActiveTabClasses(trigger);
+
+            if (parentContainer) {
+                tabViewer(tabId, parentContainer);
+            } else {
+                console.error(`Content container not found for: ${containerId}`);
+            }
+        });
+    });
+
+    if (defaultTab) {
+        const defaultTrigger = Array.from(tabTriggers).find(
+            trigger => trigger.getAttribute("data-meta-tabid") === defaultTab
+        );
+
+        if (defaultTrigger) {
+            updateActiveTabClasses(defaultTrigger); 
+            const parentContainer = document.getElementById(
+                containerId.replace("mdc-tabBar-container", "tabs-content-container")
+            );
+            tabViewer(defaultTab, parentContainer);
+        } else {
+            console.warn("Default tab not found:", defaultTab);
+        }
+    } else if (tabTriggers.length > 0) {
+        
+        const firstTab = tabTriggers[0];
+        updateActiveTabClasses(firstTab);
+        const parentContainer = document.getElementById(
+            containerId.replace("mdc-tabBar-container", "tabs-content-container")
+        );
+        tabViewer(firstTab.getAttribute("data-meta-tabid"), parentContainer);
+    }
+}
+
+function tabViewer(tabId, parentContainer) {
+    if (!parentContainer) {
+        console.error("Parent container is undefined for tabViewer.");
+        return;
+    }
+
+    /* ignore chips panels */
+    const tabPanels = parentContainer.querySelectorAll("[data-meta-tab]:not([data-meta-tab^='chips'])");
+
+    if (!tabPanels.length) {
+        console.warn("No tab panels found in container:", parentContainer);
+        return;
+    }
+
+    tabPanels.forEach(panel => {
+
+        panel.classList.add("d-none");
+
+        if (panel.getAttribute("data-meta-tab") === tabId) {
+            panel.classList.remove("d-none");
+        }
+
+    });
+}
+
+function updateActiveTabClasses(tab) {
+    
+    tab.classList.add("mdc-tab--active", "mdc-tab-active");
+    tab.setAttribute("aria-selected", "true");
+
+    const rippleElement = tab.querySelector(".mdc-ripple-upgraded");
+    if (rippleElement) {
+        rippleElement.classList.add("mdc-ripple-upgraded--background-focused");
+    }
+
+    const indicator = tab.querySelector(".mdc-tab-indicator");
+    if (indicator) {
+        indicator.classList.add("mdc-tab-indicator--active");
+    }
+}
+
+function removeActiveTabClasses(tab) {
+    
+    tab.classList.remove("mdc-tab--active", "mdc-tab-active");
+    tab.setAttribute("aria-selected", "false");
+
+
+    const rippleElement = tab.querySelector(".mdc-ripple-upgraded");
+    if (rippleElement) {
+        rippleElement.classList.remove("mdc-ripple-upgraded--background-focused");
+    }
+
+
+    const indicator = tab.querySelector(".mdc-tab-indicator");
+    if (indicator) {
+        indicator.classList.remove("mdc-tab-indicator--active");
+    }
+}
+
+
+function getUrlParameter(param) {
+    const params = new URLSearchParams(window.location.search || window.location.hash.slice(1));
+    return params.get(param);
+}
+
+
+function tabsScrollIndicators(container) {
+    if (!container) {
+        console.error("Container is undefined for tabsScrollIndicators.");
+        return;
+    }
+
+    const scrollArea = container.querySelector(".mdc-tab-scroller__scroll-area");
+    const leftIndicator = container.querySelector(".mdc-tab-bar-scroll-indicator.left");
+    const rightIndicator = container.querySelector(".mdc-tab-bar-scroll-indicator.right");
+
+    if (!scrollArea || !leftIndicator || !rightIndicator) {
+        console.warn("Required elements not found in container:", container);
+        return;
+    }
+
+leftIndicator.addEventListener("click", () => {
+    tabScroller("left", scrollArea, container);
+});
+
+rightIndicator.addEventListener("click", () => {
+    tabScroller("right", scrollArea, container);
+});
+   
+}
+
+
+function tabScroller(direction, scrollArea, container) {
+    if (!scrollArea || !container) {
+        console.error("Scroll area or container is undefined for tabScroller.");
+        return;
+    }
+
+    const tabs = Array.from(container.querySelectorAll("[data-meta-tabid]"));
+    const activeTab = container.querySelector(".mdc-tab-indicator--active");
+    const activeIndex = tabs.findIndex(tab => tab.contains(activeTab));
+
+    if (activeIndex === -1) {
+        console.warn("No active tab found.");
+        activeIndex = 0;
+        return;
+    }
+
+    let newIndex = direction === "left" ? activeIndex - 1 : activeIndex + 1;
+
+    if (newIndex < 0) newIndex = tabs.length - 1; // Go to the last tab if scrolling left from the first tab
+    if (newIndex >= tabs.length) newIndex = 0; // Go to the first tab if scrolling right from the last tab
+
+    tabs.forEach((tab, index) => {
+        if (index === newIndex) {
+            updateActiveTabClasses(tab);
+        } else {
+            removeActiveTabClasses(tab);
+        }
+    });
+
+    tabs[newIndex].scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    
+
+    const newTabId = tabs[newIndex].getAttribute("data-meta-tabid");
+    const parentContainer = document.getElementById(
+        container.id.replace("mdc-tabBar-container", "tabs-content-container")
+    );
+    tabViewer(newTabId, parentContainer);
+}
+
+
+function calcSliderHeight() {
+    document.querySelectorAll(".vertical-plane--scroll__container").forEach(container => {
+        const height = getComputedStyle(container).height;
+        container.parentNode.style.minHeight = height;
+    });
+}
+
+function createIndicatorsComponent() {
+    document.querySelectorAll("[data-slider-id]").forEach(slider => {
+        const sliderId = slider.getAttribute("data-slider-id");
+        composeIndicatorsHTML(sliderId);
+    });
+}
+
+function composeIndicatorsHTML(sliderId) {
+    const sliderItems = document.querySelectorAll(`[data-slider-containerid='${sliderId}']`);
+    const sliderIndicators = document.querySelectorAll(`[data-slider-indicatorsid='${sliderId}']`);
+    const indicatorsClass = sliderIndicators[0]?.getAttribute("data-indicators-classname");
+
+    if (sliderItems.length > 1 && indicatorsClass) {
+        const indicatorsHTML = Array.from({ length: sliderItems.length }, (_, i) =>
+            `<span class="${indicatorsClass}" onclick="swipeSlide(${i + 1}, '${sliderId}')"></span>`
+        ).join("");
+
+        sliderIndicators.forEach(indicator => (indicator.innerHTML = indicatorsHTML));
+        setActiveState(1, sliderId);
+    }
+}
+
+function setActiveState(index, sliderId) {
+    const indicators = document.querySelectorAll(`[data-slider-indicatorsid='${sliderId}'] span`);
+    const slides = document.querySelectorAll(`[data-slider-containerid='${sliderId}']`);
+
+    indicators.forEach(indicator => indicator.classList.remove("active"));
+    slides.forEach(slide => slide.classList.remove("active"));
+
+    if (index > 0 && index <= slides.length) {
+        indicators[index - 1]?.classList.add("active");
+        slides[index - 1]?.classList.add("active");
+    }
+}
+
+function swipeSlide(index, sliderId) {
+    const slides = document.querySelectorAll(`[data-slider-containerid='${sliderId}']`);
+    positionSlide(index, sliderId, slides);
+    setActiveState(index, sliderId);
+}
+
+function positionSlide(index, sliderId, items) {
+    if (index < 1 || index > items.length) return;
+
+    const parentNode = items[0]?.parentNode;
+    const itemWidth = items[0]?.clientWidth + 16 || 0;
+    const offset = (index - 1) * itemWidth * -1;
+
+    if (parentNode) parentNode.style.left = `${offset}px`;
+}
+
+function swipedetect(el, callback) {
+    let startX, startY, startTime;
+
+    el.addEventListener("touchstart", e => {
+        const touch = e.changedTouches[0];
+        startX = touch.pageX;
+        startY = touch.pageY;
+        startTime = Date.now();
+    });
+
+    el.addEventListener("touchend", e => {
+        const touch = e.changedTouches[0];
+        const distX = touch.pageX - startX;
+        const distY = touch.pageY - startY;
+        const elapsedTime = Date.now() - startTime;
+
+        if (elapsedTime <= 300 && Math.abs(distX) >= 60 && Math.abs(distY) <= 100) {
+            callback(distX < 0 ? "left" : "right");
+        }
+    });
+}
+
+function attachSwipeDetectfn() {
+    document.querySelectorAll("[data-slider-id]").forEach(el =>
+        swipedetect(el, swipedir => {
+            const sliderId = el.getAttribute("data-slider-id");
+            const slides = document.querySelectorAll(`[data-slider-containerid='${sliderId}']`);
+            const activeIndex = Array.from(slides).findIndex(slide => slide.classList.contains("active"));
+
+            if (swipedir === "left" && activeIndex < slides.length - 1) swipeSlide(activeIndex + 2, sliderId);
+            if (swipedir === "right" && activeIndex > 0) swipeSlide(activeIndex, sliderId);
+        })
+    );
+}
+
+const hiddenTab = document.querySelector(".mdc-tab-bar-scroll-indicator[aria-hidden='true']");
+if (hiddenTab && hiddenTab.contains(document.activeElement)) {
+    document.activeElement.blur(); // Remove focus from hidden element
+    document.querySelector(".mdc-tab--active a")?.focus(); // Move focus to active tab
+}

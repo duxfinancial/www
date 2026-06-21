@@ -1,0 +1,142 @@
+let hasInitializedLoginHeader = false;
+
+function deleteLoginCookie(name) {
+    const domain = ".momentum.co.za";
+
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${domain};`;
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+}
+
+function getCookie(name) {
+    const cookies = document.cookie.split('; ');
+    for (let cookie of cookies) {
+        let [cookieName, cookieValue] = cookie.split('=');
+        if (cookieName === name) {
+            return decodeURIComponent(cookieValue);
+        }
+    }
+    return null;
+}
+
+function clearStorage() {
+    localStorage.clear();
+    sessionStorage.clear();
+    console.log('Local and session storage cleared.');
+}
+
+function persistUserInfo() {
+    try {
+        var userInfo = JSON.parse(sessionStorage.getItem("id_token_claims_obj"));
+        if (userInfo && (userInfo.given_name || userInfo.family_name)) {
+            localStorage.setItem('given_name', userInfo.given_name || '');
+            localStorage.setItem('family_name', userInfo.family_name || '');
+            console.log("User info persisted to localStorage!");
+        }
+    } catch (e) {
+        console.log("Error persisting user info:", e);
+    }
+}
+
+function getUserInfo() {
+    return {
+        given_name: localStorage.getItem('given_name') || '',
+        family_name: localStorage.getItem('family_name') || ''
+    };
+}
+
+function resetLoginHeader() {
+    hasInitializedLoginHeader = false;
+}
+
+function initLoginHeader() {
+    // ----------------------------------------
+    // Guard to ensure this only runs once
+    // ----------------------------------------
+    if (hasInitializedLoginHeader) return;
+    hasInitializedLoginHeader = true;
+
+    var uniqueId = getCookie('eet-sum-mor');
+    var sessionValid = false;
+    var portfolioUrl = '';
+    var logOutUrl = '';
+
+
+    // Determine environment URLs
+
+    if (typeof currentEnv === 'undefined') currentEnv = 'prod'; // fallback
+
+    if (currentEnv === 'prod') {
+        logOutUrl = 'https://account.momentum.co.za/oidc/logout?client_id=uUiON1PUSaIYELkQcvhW36ctP71L8XXN&post_logout_redirect_uri=https://www.momentum.co.za/momentum/personal';
+        portfolioUrl = 'https://www.momentum.co.za/my-momentum';
+    } else if (currentEnv === 'pre') {
+        logOutUrl = 'https://account-pre.momentum.co.za/oidc/logout?client_id=6f9Kidmpf59CE7BFX0B9JqS2inzTBDwo&post_logout_redirect_uri=https://wwpre.momentum.co.za/momentum/personal';
+        portfolioUrl = 'https://wwpre.momentum.co.za/my-momentum';
+    } else if (currentEnv === 'tst') {
+        logOutUrl = 'https://account-pre.momentum.co.za/oidc/logout?client_id=6f9Kidmpf59CE7BFX0B9JqS2inzTBDwo&post_logout_redirect_uri=https://wwtst.momentum.co.za/momentum/personal';
+        portfolioUrl = 'https://wwtst.momentum.co.za/my-momentum';
+    } else {
+        logOutUrl = 'https://account-pre.momentum.co.za/oidc/logout?client_id=6f9Kidmpf59CE7BFX0B9JqS2inzTBDwo&post_logout_redirect_uri=https://wwdev.momentum.co.za/momentum/personal';
+        portfolioUrl = 'https://wwdev.momentum.co.za/my-momentum';
+    }
+
+    if (uniqueId) {
+        persistUserInfo();
+        console.log("User Data persisting has been activated!");
+    }
+
+    var loginElement = document.getElementById('app-bar-login');
+    var logoutElement = document.getElementById('dropdown-logout');
+    var userDisplayElement = document.getElementById('user-profile-element');
+    var userInitials = document.getElementById('user_initials');
+    var userCreds = document.getElementById('user-profile-name');
+    var userNames = getUserInfo();
+
+    if (loginElement && userDisplayElement) {
+        if (uniqueId) {
+            loginElement.style.cssText = 'display: none!important';
+            userDisplayElement.style.display = 'inline-block';
+
+            if (userCreds) {
+                userCreds.textContent = userNames.given_name;
+            }
+
+            if (userInitials) {
+                var initials = (userNames.given_name.charAt(0) || '') + (userNames.family_name.charAt(0) || '');
+                userInitials.textContent = initials.toUpperCase();
+            }
+
+            logoutElement.href = logOutUrl
+            logoutElement.title = 'Log out of your account';
+
+            logoutElement.addEventListener('click', function (event) {
+                deleteLoginCookie('eet-sum-mor');
+                clearStorage();
+                setTimeout(function() {
+                    window.location.assign(logOutUrl);
+                }, 100);
+                window.event.preventDefault();
+            });
+        } else {
+            loginElement.style.cssText = '';
+            userDisplayElement.style.display = 'none';
+        }
+
+    }
+
+    // -------------------------
+    // Navigation drawer login
+    // -------------------------
+    var navLoginElement = document.querySelector('#main-drawer-login');
+    if (navLoginElement) {
+        if (uniqueId) {
+            navLoginElement.textContent = 'Portfolio';
+            navLoginElement.href = portfolioUrl;
+            navLoginElement.title = 'View your My Momentum portfolio';
+        }
+    }
+}
+
+
+
+document.addEventListener('DOMContentLoaded', initLoginHeader);
+window.addEventListener('pageshow', initLoginHeader);

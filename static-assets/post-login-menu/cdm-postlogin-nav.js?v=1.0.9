@@ -1,0 +1,86 @@
+// Function to check conditions and apply styles
+function updateStyles() {
+    const userProfile = document.querySelector('#user-profile-element');
+    const pageCrumbs = document.querySelector('#motion-breadcrumbs');
+    const userNameTrigger = document.querySelector('.md3-trigger .text');
+    const siteNavBar = document.querySelector('.mdc-top-app-bar--fixed-scrolled');
+    const siteBar = document.querySelector(".mdc-top-app-bar");
+
+    // Get computed styles
+    const optionalDisplay = userProfile ? window.getComputedStyle(userProfile).display : null;
+    const hiddenDisplay = pageCrumbs ? window.getComputedStyle(pageCrumbs).display : null;
+
+    // Check if we should do nothing
+    if (optionalDisplay === 'none' && hiddenDisplay === 'none') {
+        return;
+    }
+
+    // Check if breadcrumbs and navbar are siblings
+    const areSiblings = pageCrumbs &&
+        siteNavBar &&
+        pageCrumbs.parentNode === siteNavBar.parentNode;
+
+    // Check if conditions are met to remove drop-shadow
+    if (optionalDisplay === 'inline-block' &&
+        hiddenDisplay === 'block' &&
+        areSiblings) {
+
+        if (siteNavBar) {
+            siteNavBar.style.boxShadow = 'none';
+        }
+        if (userNameTrigger) {
+            userNameTrigger.style.color = '#000';
+        }
+        if (siteBar) {
+            siteBar.style.zIndex = '6';
+        }
+
+    } else {
+        // Reset if conditions are not met
+        if (siteNavBar) {
+            siteNavBar.style.boxShadow = '';
+        }
+        if (userNameTrigger) {
+            userNameTrigger.style.color = '';
+        }
+        if (siteBar) {
+            siteBar.style.zIndex = '';
+        }
+    }
+}
+
+// Run on page load
+document.addEventListener('DOMContentLoaded', updateStyles);
+
+// Set up MutationObserver to watch for style changes
+const observer = new MutationObserver((mutations) => {
+    updateStyles();
+});
+
+// Start observing once DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    const elementsToWatch = [
+        document.querySelector('#user-profile-element'),
+        document.querySelector('#motion-breadcrumbs'),
+        document.querySelector('.md3-trigger .text'),
+        document.querySelector(".mdc-top-app-bar"),
+        document.querySelector('.mdc-top-app-bar--fixed-scrolled')
+    ];
+
+    elementsToWatch.forEach(element => {
+        if (element) {
+            observer.observe(element, {
+                attributes: true,
+                attributeFilter: ['style', 'class']
+            });
+        }
+    });
+
+    // Observe the entire document for broader changes
+    observer.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['style', 'class'],
+        subtree: true,
+        childList: true // detect when new elements are added
+    });
+});

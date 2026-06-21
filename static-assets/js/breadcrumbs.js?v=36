@@ -1,0 +1,331 @@
+document.addEventListener("DOMContentLoaded", function() {
+    var breadcrumbContainer = document.getElementById("breadcrumb");
+    var breadcrumbContainerTwo = document.getElementById("breadcrumbs");
+
+    var navLabel = breadcrumbContainerTwo.getAttribute("data-internal-name");
+
+    var pathArray = window.location.pathname.split("/").filter(function(path) {
+        return path.length > 0; 
+    });
+
+    var breadcrumbHtml = "";
+    var fullPath = "";
+    var displayedSegments = 0; 
+
+    var skipSegments = ["personal", "compliance", "campaigns", "get-help", "momentum", "campaign", "support", 
+        "business-solutions", "business-continuity", "kimi", "business", "corporate" ];
+
+    var skipPaths = {
+        "momentum/personal/will-trust-estate/call-me-back": ["lead"],
+        "momentum/personal/car-and-home-insurance/campaign": ["switch"],
+        "momentum/personal/car-and-home-insurance/campaign/switch": ["getadvice"],
+        "momentum/personal/find-a-financial-adviser/medical-aid-call-me-back": ["medical"],
+        "momentum/personal/medical-aid/call-me-back/getadvice": ["medical-aid"],
+        "momentum/personal/medical-aid/call-me-back": ["getadvice"],
+        "momentum/personal/car-and-home-insurance/find-a-short-term-insurance-adviser":["insure"],
+        "momentum/personal/car-and-home-insurance":["insure"],
+        "momentum/business/investment-management/local-and-offshore-unit-trusts/request-a-call-back":["getadvice"],
+        "momentum/business/investment-management/local-and-offshore-unit-trusts/request-a-call-back/getadvice":["investment-and-savings"],
+        "momentum/personal/find-a-financial-adviser/insure-call-me-back":["mi-insure"],
+        "momentum/personal/life-insurance/lead/":["lifeinsurance"],
+        "momentum/personal/wealth/callmeback/":["getadvice"],
+        "momentum/personal/wealth/callmeback/getadvice":["investment-and-savings"],
+        "momentum/personal/car-and-home-insurance/car-insurance/":["insure"],
+        "momentum/personal/savings/callmeback":["getadvice"],
+        "momentum/personal/savings/callmeback/getadvice":["investo"],
+        "momentum/about-us": ["about-us"],
+        "momentum/personal/products/estate-planning/estate-administration/estate-provider-benefit": ["estate-provider-benefit"],
+        "momentum/personal/products/estate-planning/estate-administration": ["estate-administration"],
+        "momentum/personal/products/estate-planning": ["estate-planning"],
+        "momentum/personal/products": ["products"],
+        "investment-management/resource-centre/brochures": ["brochures"],
+        "investment-management/resource-centre/fund-facts-and-figures": ["fund-facts-and-figures"],
+        //"investment-management/resource-centre/more-information": ["local-information"],
+        "investment-management/resource-centre/forms": ["forms"],
+        "investment-management/resource-centre/media-centre": ["media-centre"],
+        "investment-management/resource-centre/events-and-webinars": ["events-and-webinars"],
+        "investment-management/resource-centre/more-information": ["more-information"],
+        "investment-management/resource-centre/events-archive": ["events-archive"],
+        "investment-management/resource-centre/sponsorships-and-events": ["sponsorships-and-events"],
+        "wealth/resource-centre/local-investing": ["local-investing"],
+        "wealth/resource-centre/events-and-webinars": ["events-and-webinars"],
+        "wealth/resource-centre/offshore-investing": ["offshore-investing"],
+        "wealth/resource-centre/more-information": ["more-information"],
+        "momentum/personal/savings/resource-centre/legal-and-compliance": ["legal-and-compliance"],
+        "momentum/personal/savings/resource-centre/resources-for-individuals": ["resources-for-individuals"],
+        "momentum/personal/savings/resource-centre/media-centre": ["media-centre"]
+    };
+
+    function shouldSkipSegment(segment, fullPath) {
+        if (skipSegments.includes(segment)) return true;
+        for (const [parentPath, subSegments] of Object.entries(skipPaths)) {
+            if (fullPath.includes(parentPath) && subSegments.includes(segment)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // **Determine Home URL based on business or personal**
+var homeUrl = window.location.pathname.includes("/momentum/business")
+    ? "/momentum/business"
+    : window.location.pathname.includes("/momentum/corporate")
+        ? "/momentum/corporate"
+        : "/momentum/personal";
+    if (pathArray.length > 2) {
+        breadcrumbHtml = `<li class="breadcrumb-item"><a href="${homeUrl}" class="breadcrumb-link" data-content-id='Home'>Home</a></li>`;
+
+        var nonSkippedSegments = pathArray.filter(segment => {
+            fullPath += "/" + segment;
+            return !shouldSkipSegment(segment, fullPath);
+        }).length;
+
+        if (nonSkippedSegments > 2) {
+            breadcrumbHtml += `<li class="breadcrumb-item breadcrumb-link" data-content-id='...'>...</li>`;
+        }
+
+        fullPath = ""; 
+        pathArray.forEach(function(segment, index) {
+            fullPath += "/" + segment;
+            if (shouldSkipSegment(segment, fullPath)) return;
+
+            displayedSegments++;
+
+            if (displayedSegments > nonSkippedSegments - 2) {
+                var formattedSegment = segment.replace(/-/g, " ").toLowerCase();
+                formattedSegment = formattedSegment.charAt(0).toUpperCase() + formattedSegment.slice(1);
+
+                if (index === pathArray.length - 1) {
+                    breadcrumbHtml += `<li class="breadcrumb-item active" aria-current="page"><a href="${fullPath}" class="breadcrumb-link" data-content-id='${navLabel}'>${navLabel}</a></li>`;
+                } else {
+                    breadcrumbHtml += `<li class="breadcrumb-item"><a href="${fullPath}" class="breadcrumb-link" data-content-id='${formattedSegment}'>${formattedSegment}</a></li>`;
+                }
+            }
+        });
+    } else {
+        breadcrumbHtml = `<li class="breadcrumb-item"><a href="${homeUrl}" class="breadcrumb-link" data-content-id='Home'>Home</a></li>`;
+        pathArray.forEach(function(segment, index) {
+            fullPath += "/" + segment;
+            if (shouldSkipSegment(segment, fullPath)) return;
+
+            var formattedSegment = segment.replace(/-/g, " ").toLowerCase();
+            formattedSegment = formattedSegment.charAt(0).toUpperCase() + formattedSegment.slice(1);
+
+            if (index === pathArray.length - 1) {
+                breadcrumbHtml += `<li class="breadcrumb-item active" aria-current="page"><a href="${fullPath}" class="breadcrumb-link" data-content-id='${navLabel}'>${navLabel}</a></li>`;
+            } else {
+                breadcrumbHtml += `<li class="breadcrumb-item"><a href="${fullPath}" class="breadcrumb-link" data-content-id='${formattedSegment}'>${formattedSegment}</a></li>`;
+            }
+        });
+    }
+
+    breadcrumbContainer.innerHTML = breadcrumbHtml;
+
+});
+
+  
+$(".gsc-input").focus()
+$("#motion-search").click(function(){
+	$(".gsc-input").focus();
+});
+		
+$("#motion-search-close").click(function(){
+	$(".gsc-input").val("");
+});
+
+
+if (window.location.href.indexOf("/personal/blog") != -1) {
+    $(".custom-background--banner").addClass("cus-height-blog-curtain");
+    $(".motion-carousel-indicators").addClass("d-block");
+} else {
+   $(".custom-background--banner").removeClass("cus-height-blog-curtain");
+   $(".motion-carousel-indicators").removeClass("d-block");
+};
+
+if (window.location.href.indexOf("/get-help/app") != -1) {
+    $(".motion-inpage-banner").addClass("app-banner");
+} else {
+   $(".motion-inpage-banner").removeClass("app-banner");
+}; 
+
+if (window.location.href.indexOf("/about-us/our-brand-story/campaign/womens-month-2019") != -1) {
+    $(".motion-z-layout--reversed .motion-z-layout__inner:nth-child(odd) .motion-z-layout__cell").addClass("cus-position");
+} else {
+   $(".motion-z-layout--reversed .motion-z-layout__inner:nth-child(odd) .motion-z-layout__cell").removeClass("cus-position");
+}; 
+
+
+
+
+$(function () {
+
+  const href = window.location.href;
+  const path = window.location.pathname;
+
+  let section = null;
+
+  const isContactPage =
+    path === "/momentum/get-help/contact-us" ||
+    path === "/momentum/get-help/contact-us/";
+
+  /* ----------------------------------------------------
+     SECTION detection
+  ---------------------------------------------------- */
+
+  if (!isContactPage) {
+
+      section = "Individual"; // default
+    
+      if (
+        href.includes("/momentum/business") ||
+        href.includes("/momentum/get-help/contact-us/for-business")
+      ) {
+        section = "Business";
+    
+      } else if (
+        href.includes("/momentum/corporate") ||
+        href.includes("/momentum/get-help/contact-us/for-corporate")
+      ) {
+        section = "Corporate";
+      }
+    
+  }
+
+  /* ----------------------------------------------------
+     TOP NAV active state
+  ---------------------------------------------------- */
+  $(".navactive-state, .navactive-statePersonal, .navactive-stateBusiness")
+    .removeClass("topNavActive");
+
+  const topNavMap = {
+    Individual: ".navactive-statePersonal",
+    Business: ".navactive-state",
+    Corporate: ".navactive-stateBusiness"
+  };
+
+  if (section) {
+    $(topNavMap[section]).addClass("topNavActive");
+  }
+
+  /* ----------------------------------------------------
+     SIDE NAV (accordion + active link)
+  ---------------------------------------------------- */
+  $(".mdc-drawer__accordioncontent")
+    .removeClass("open slidedown");
+
+  $(".mdc-drawer__accordionlabel .mdc-expander__indicator")
+    .text("expand_more");
+
+  $(".mdc-list-item.nav-link")
+    .removeClass("mdc-list-item--activated");
+
+  if (section) {
+
+    const $activeLink = $(
+      `.mdc-list-item.nav-link[data-link-type="${section}"]`
+    ).first();
+
+    if ($activeLink.length) {
+
+      $activeLink.addClass("mdc-list-item--activated");
+
+      const $accordionContent = $activeLink.closest(
+        ".mdc-drawer__accordioncontent"
+      );
+
+      $accordionContent.addClass("open slidedown");
+
+      $accordionContent
+        .prev(".mdc-drawer__accordionlabel")
+        .find(".mdc-expander__indicator")
+        .text("expand_less");
+    }
+  }
+
+  /* ----------------------------------------------------
+     CONTACT US routing logic
+  ---------------------------------------------------- */
+  $("#motion-top-bar-right").on(
+    "click",
+    'a[href*="/momentum/get-help/contact-us"]',
+    function (e) {
+
+      e.preventDefault();
+      window.location.href = "/momentum/get-help/contact-us";
+
+    }
+  );
+
+});
+
+// Select all elements with the class "mobilePad" inside a "grid" section
+const mobilePadElements = document.querySelectorAll('section.grid .mobilePad');
+
+// Iterate over each mobilePad element
+mobilePadElements.forEach(mobilePad => {
+    // Find the closest parent section with the class "grid"
+    const parentSection = mobilePad.closest('section.grid');
+    
+    // Add the 'force' class to the parent section
+    if (parentSection) {
+        parentSection.classList.add('mobileZlayoutPad');
+    }
+});
+
+// Select all spans with the specified class
+const spans = document.querySelectorAll('span.mdc-button__icon');
+
+// Loop through each span
+spans.forEach(span => {
+  // Check if the inner text is 'none'
+  if (span.textContent.trim() === 'none') {
+    // Remove the entire span element
+    span.remove();
+  }
+});
+document.addEventListener("DOMContentLoaded", function() {
+    var breadcrumbItems = document.querySelectorAll('#breadcrumb li');
+
+    // Check if there is a second item
+    if (breadcrumbItems.length > 2) {
+        var secondBreadcrumb = breadcrumbItems[1]; // Get the second breadcrumb item
+
+        // Get the text of the second breadcrumb and convert it to lowercase
+        var text = secondBreadcrumb.textContent.toLowerCase();
+        
+        // Capitalize only the first word
+        var capitalizedText = text.charAt(0).toUpperCase() + text.slice(1);
+
+        // Update the second breadcrumb's text with the capitalized version
+        secondBreadcrumb.querySelectorAll('.breadcrumb-item a').textContent = capitalizedText;
+    }
+    
+    
+});
+
+    function toggleBreadcrumbClass() {
+      const breadcrumbs = document.getElementById('motion-breadcrumbs');
+      const scrollThreshold = 1; // 1 pixel threshold for when to add/remove cl;asses
+      
+      if (window.scrollY > scrollThreshold) {
+        breadcrumbs.classList.add('mdc-breadcrumbs--fixed-scrolled', 'bt-1-motion-grey--light');
+      } else {
+        breadcrumbs.classList.remove('mdc-breadcrumbs--fixed-scrolled', 'bt-1-motion-grey--light');
+      }
+    }
+
+
+    window.addEventListener('scroll', toggleBreadcrumbClass);
+    
+
+$(window).on("scroll", function () {
+  const isSmallScreen = window.innerWidth <= 1279; // or use $(window).width() <= 1279
+  const hasTabs = $(".mat-tab-header").length > 0;
+
+  if (isSmallScreen && hasTabs) {
+    const hasScrolled = $(this).scrollTop() > 190;
+
+    $(".mat-tab-header").toggleClass("tab-scroller", hasScrolled);
+    $(".mdc-breadcrumbs--fixed-scrolled").toggleClass("removeshadow", hasScrolled);
+  }
+});
